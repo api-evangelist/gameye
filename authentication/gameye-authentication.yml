@@ -1,0 +1,37 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/gameye-session-openapi.yml
+docs: https://gameye.com/docs/api-v2/authentication/
+summary:
+  types:
+  - http
+  scheme: bearer
+  token_delivery: Authorization header
+  token_format: 'Authorization: Bearer <token>'
+  token_management: >-
+    API tokens are created per-user in the Gameye Admin Panel (Users > Edit >
+    API Tokens > Add Token). The full token value is shown only once at creation
+    time. All Session API endpoints require a bearer token.
+schemes:
+- name: api-token
+  type: http
+  scheme: bearer
+  bearerFormat: token
+  sources:
+  - openapi/gameye-session-openapi.yml
+# Token permission scopes attached to operation security[] requirements in the
+# OpenAPI. Gameye uses bearer tokens (not OAuth2), so these are token-level
+# permissions rather than OAuth scopes.
+token_scopes:
+- scope: session:start
+  description: Allocate a new game session (POST /session).
+- scope: session:read
+  description: List and describe sessions (GET /session, GET /session/{id}).
+- scope: session:stop
+  description: Terminate a running session (DELETE /session/{id}).
+- scope: artifact:read
+  description: Download artifacts from a terminated session's container (GET /artifacts).
+- scope: regions:read
+  description: List available locations and check image tags (GET /available-location/{image}, GET /tag/...).
+- scope: logs:read
+  description: Stream a session's stdout/stderr logs (GET /logs).
