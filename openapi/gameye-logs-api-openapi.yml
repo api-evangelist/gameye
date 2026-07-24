@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Gameye Session Artifacts Logs API
+  version: 1.2.1
+  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.
+
+    # Authentication
+
+    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.
+
+    For example: ```Authorization: Bearer <token>```
+
+    '
+  x-logo:
+    url: https://static.gameye.com/images/android-chrome-512x512.png
+    altText: Gameye Logo
+servers:
+- url: https://api.sandbox-gameye.gameye.net
+  description: The main sandbox environment.
+- url: https://api.production-gameye.gameye.net
+  description: The main production environment.
+tags:
+- name: Logs
+paths:
+  /logs:
+    get:
+      operationId: stream-logs
+      summary: Get logs
+      description: 'Streams the output that the game server writes. You can use it to debug server issues.
+
+        '
+      security:
+      - api-token:
+        - logs:read
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 'The unique ID of the session you want logs from.
+
+            '
+          minLength: 1
+      - name: follow
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: 'Whether to keep the stream open or to get all available logs up to what the container has written to stdout/stderr so far.
+
+            '
+      responses:
+        200:
+          content:
+            text/plain: {}
+        401:
+          description: 'You are not authorized. Make sure your bearer token is correct.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: 'Your API token may not have the required permissions to invoke this endpoint.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: 'That session doesn''t seem to exist. Double-check the ID.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Logs
+components:
+  schemas:
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - statusCode
+      - code
+      - message
+      - details
+      - path
+      - identifier
+      - timestamp
+      properties:
+        statusCode:
+          type: integer
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+        identifier:
+          type: string
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldViolation'
+  securitySchemes:
+    api-token:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+externalDocs:
+  url: https://docs.gameye.com

@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: Gameye Session Artifacts Tag API
+  version: 1.2.1
+  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.
+
+    # Authentication
+
+    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.
+
+    For example: ```Authorization: Bearer <token>```
+
+    '
+  x-logo:
+    url: https://static.gameye.com/images/android-chrome-512x512.png
+    altText: Gameye Logo
+servers:
+- url: https://api.sandbox-gameye.gameye.net
+  description: The main sandbox environment.
+- url: https://api.production-gameye.gameye.net
+  description: The main production environment.
+tags:
+- name: Tag
+paths:
+  /tag/{region}/{image}/{version}:
+    parameters:
+    - name: region
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the region
+    - name: image
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The id of the image
+    - name: version
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The image version otherwise known as the Docker 'tag'.
+    get:
+      operationId: tag-exists
+      summary: Check if tag exists in the Gameye fleet
+      security:
+      - api-token:
+        - regions:read
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOk'
+        400:
+          description: 'Bad request.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: 'You are not authorized. Please make sure that
+
+            the included bearer token is correct.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: 'Your API token may not have the required permissions to invoke this endpoint.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: 'Image not found or you are not authorized to use this image.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Tag
+components:
+  schemas:
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+    TagOk:
+      type: object
+      required:
+      - exists
+      properties:
+        exists:
+          type: boolean
+    ErrorResponse:
+      type: object
+      required:
+      - statusCode
+      - code
+      - message
+      - details
+      - path
+      - identifier
+      - timestamp
+      properties:
+        statusCode:
+          type: integer
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+        identifier:
+          type: string
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldViolation'
+  securitySchemes:
+    api-token:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+externalDocs:
+  url: https://docs.gameye.com

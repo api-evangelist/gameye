@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Gameye Session Artifacts API
+  version: 1.2.1
+  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.
+
+    # Authentication
+
+    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.
+
+    For example: ```Authorization: Bearer <token>```
+
+    '
+  x-logo:
+    url: https://static.gameye.com/images/android-chrome-512x512.png
+    altText: Gameye Logo
+servers:
+- url: https://api.sandbox-gameye.gameye.net
+  description: The main sandbox environment.
+- url: https://api.production-gameye.gameye.net
+  description: The main production environment.
+tags:
+- name: Artifacts
+paths:
+  /artifacts:
+    get:
+      operationId: artifacts
+      summary: Download an artifact file from the underlying container.
+      description: "Initiates a download of an artifact which could be a file or a folder inside the underlying\ncontainer. The path should be an absolute Unix path to a specific file or folder.\n\nThe artifact will be provided in the form of a .tar.gz archive that contains your requested\nfile or folder. Please limit your download in size to a maximum of 100mb.\n\nPlease note that the artifact is only available for download after the session has been\nterminated and will be downloaded directly from the container itself.\n\nThe artifacts are available for download from the underlying container up until the \ncontainer is removed from its host machine. This means that your logs may or \nmay not be available post-termination.\n"
+      security:
+      - api-token:
+        - artifact:read
+      parameters:
+      - name: session
+        in: query
+        required: true
+        description: 'The id of the session to download an artifact from.
+
+          '
+        schema:
+          type: string
+          minLength: 1
+          example: c595bc6f-8522-4a62-95cd-8742136643ea
+      - name: path
+        in: query
+        required: true
+        description: 'The local path inside the container to the target file or folder requested
+
+          for download.
+
+          '
+        schema:
+          type: string
+          minLength: 1
+          example: /home/{user}/{game-folder-name}/crashdump.log
+      responses:
+        200:
+          description: 'A download of the artifact in .tar.gz format has been initiated.
+
+            '
+          content:
+            application/x-tar: {}
+        401:
+          description: 'You are not authorized to fetch an artifact. Please make sure that the included bearer token is correct.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: 'Your API token may not have the required permissions to invoke this endpoint.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: 'Could not find a session with the given session id. It is possible that either the session has never existed at all or the container''s  lifespan on the machine has expired.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Artifacts
+components:
+  schemas:
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - statusCode
+      - code
+      - message
+      - details
+      - path
+      - identifier
+      - timestamp
+      properties:
+        statusCode:
+          type: integer
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+        identifier:
+          type: string
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldViolation'
+  securitySchemes:
+    api-token:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+externalDocs:
+  url: https://docs.gameye.com
