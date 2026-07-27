@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gameye-session-openapi.yml
+workflows:
+- file: gameye-allocate-session.yml
+  workflowId: allocate-session
+  title: Allocate a Gameye session and get its connection address
+  summary: Pick an available region for an image, start a session, and read its host/ports.
+- file: gameye-player-lifecycle.yml
+  workflowId: player-lifecycle
+  title: Manage the player roster on a Gameye session
+  summary: Start a session, register players joining, then remove players leaving.
+- file: gameye-session-teardown.yml
+  workflowId: session-teardown
+  title: Stream logs, stop a Gameye session, and download an artifact
+  summary: Pull a session's logs, terminate it, then download a diagnostic artifact.

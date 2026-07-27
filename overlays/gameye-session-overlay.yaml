@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Gameye Session API
+  version: 1.0.0
+extends: openapi/gameye-session-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-19'
+    x-apievangelist-provider: gameye
+    x-apievangelist-category: game-server-orchestration
+- target: $.info
+  update:
+    x-artifacts:
+      authentication: authentication/gameye-authentication.yml
+      errors: errors/gameye-problem-types.yml
+      conventions: conventions/gameye-conventions.yml
+      lifecycle: lifecycle/gameye-lifecycle.yml
+      sandbox: sandbox/gameye-sandbox.yml
+      data-model: data-model/gameye-data-model.yml
+- target: $.servers
+  update:
+    x-note: >-
+      Sandbox (api.sandbox-gameye.gameye.net) and production
+      (api.production-gameye.gameye.net) share the same OpenAPI description.

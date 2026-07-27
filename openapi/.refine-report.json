@@ -1,0 +1,22 @@
+{
+  "provider": "gameye",
+  "sources": [
+    "gameye-artifacts-api-openapi.yml",
+    "gameye-available-location-api-openapi.yml",
+    "gameye-logs-api-openapi.yml",
+    "gameye-session-api-openapi.yml",
+    "gameye-tag-api-openapi.yml"
+  ],
+  "outputs": [
+    "gameye-artifacts-api-openapi.yml",
+    "gameye-available-location-api-openapi.yml",
+    "gameye-logs-api-openapi.yml",
+    "gameye-session-api-openapi.yml",
+    "gameye-tag-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

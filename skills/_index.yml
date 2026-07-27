@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/gameye-session-openapi.yml
+skills:
+- file: gameye-allocate-and-connect.md
+  name: Allocate a game session and get a connection address
+  api: openapi/gameye-session-openapi.yml
+  operations: [get-available-locations, session-run, describe-session]
+- file: gameye-manage-players.md
+  name: Track players joining and leaving a session
+  api: openapi/gameye-session-openapi.yml
+  operations: [join-session, leave-session, describe-session]
+- file: gameye-teardown-and-collect-logs.md
+  name: Tear down a session and collect its logs and artifacts
+  api: openapi/gameye-session-openapi.yml
+  operations: [stream-logs, session-stop, artifacts]

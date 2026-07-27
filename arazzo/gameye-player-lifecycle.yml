@@ -1,0 +1,64 @@
+arazzo: 1.0.1
+info:
+  title: Manage the player roster on a Gameye session
+  version: 1.0.0
+  summary: Start a session, register players joining, then remove players leaving.
+sourceDescriptions:
+- name: gameye
+  url: ../openapi/gameye-session-openapi.yml
+  type: openapi
+workflows:
+- workflowId: player-lifecycle
+  summary: Allocate a session then track players joining and leaving.
+  inputs:
+    type: object
+    required: [image, players]
+    properties:
+      image:
+        type: string
+        example: nginx
+      location:
+        type: string
+        example: europe
+      players:
+        type: array
+        items:
+          type: string
+        example: [player-1, player-2]
+  steps:
+  - stepId: run-session
+    operationId: session-run
+    requestBody:
+      contentType: application/json
+      payload:
+        location: $inputs.location
+        image: $inputs.image
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      sessionId: $response.body#/id
+  - stepId: join-players
+    operationId: join-session
+    requestBody:
+      contentType: application/json
+      payload:
+        session: $steps.run-session.outputs.sessionId
+        players: $inputs.players
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      count: $response.body#/count
+  - stepId: leave-players
+    operationId: leave-session
+    requestBody:
+      contentType: application/json
+      payload:
+        players: $inputs.players
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      count: $response.body#/count
+  outputs:
+    sessionId: $steps.run-session.outputs.sessionId
+    joinedCount: $steps.join-players.outputs.count
+    remainingCount: $steps.leave-players.outputs.count

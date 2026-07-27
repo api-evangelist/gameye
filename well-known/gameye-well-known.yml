@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: searched
+host: https://gameye.com
+documents:
+- path: /.well-known/api-catalog        # RFC 9727 - API catalog / linkset
+  status: 200
+  file: gameye-api-catalog.json
+- path: /.well-known/security.txt        # RFC 9116
+  status: 404
+- path: /.well-known/openid-configuration # OIDC discovery
+  status: 000
+  note: connection refused on api host (no OIDC)
+notes: >-
+  gameye.com publishes an RFC 9727 API catalog at /.well-known/api-catalog that
+  links to the OpenAPI description (openapi.yaml), the HTML docs, and the health
+  and status endpoints for both the production and sandbox environments.

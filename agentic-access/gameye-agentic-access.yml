@@ -1,0 +1,157 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/gameye-session-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 10
+  by_action_class:
+    acting: 4
+    connected: 6
+  by_consequence:
+    write: 3
+    read: 6
+    safety-critical: 1
+  human_in_the_loop_required: 1
+operations:
+- path: /session
+  method: post
+  operationId: session-run
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - session:start
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /session
+  method: get
+  operationId: session-list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - session:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /session/{id}
+  method: get
+  operationId: describe-session
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - session:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /session/{id}
+  method: delete
+  operationId: session-stop
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - session:stop
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /session/player/join
+  method: put
+  operationId: join-session
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /session/player/leave
+  method: delete
+  operationId: leave-session
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /artifacts
+  method: get
+  operationId: artifacts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - artifact:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /available-location/{image}
+  method: get
+  operationId: get-available-locations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - regions:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tag/{region}/{image}/{version}
+  method: get
+  operationId: tag-exists
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - regions:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /logs
+  method: get
+  operationId: stream-logs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - logs:read
+    token:
+      max-ttl: 3600
+    audit: none

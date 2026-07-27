@@ -1,0 +1,50 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gameye-session-openapi.yml
+entities:
+- name: Session
+  description: A running (or historical) containerized game server instance.
+  key: id
+  key_format: UUIDv4 (caller-supplied or Gameye-generated)
+  fields: [id, image, tag, location, host, created, port, status, labels, env, args, ttl, external_id, players]
+- name: Player
+  description: A player ID registered as joined to a session.
+  fields: [id]
+- name: Port
+  description: A container-to-host port mapping for a session.
+  fields: [type, container, host]
+- name: Location
+  description: A region/location able to host a given image, with pingable IPs.
+  key: id
+  fields: [id, ips]
+- name: Image
+  description: A Docker image (application) that can be run as a session, addressed by tag/version.
+  fields: [image, tag/version]
+- name: Artifact
+  description: A file or folder retrieved from a terminated session's container as a .tar.gz.
+  fields: [session, path]
+relationships:
+- from: Session
+  to: Location
+  type: belongs_to
+  via: location
+- from: Session
+  to: Image
+  type: belongs_to
+  via: image
+- from: Session
+  to: Port
+  type: has_many
+  via: ports/port
+- from: Session
+  to: Player
+  type: has_many
+  via: players.joined
+- from: Artifact
+  to: Session
+  type: belongs_to
+  via: session
+- from: Location
+  to: Image
+  type: references
+  via: image (availability check)

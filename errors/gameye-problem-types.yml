@@ -1,0 +1,60 @@
+generated: '2026-07-19'
+method: searched
+source: https://gameye.com/docs/troubleshooting/error-codes/
+derived_from: openapi/gameye-session-openapi.yml
+format: custom-json
+envelope:
+  media_type: application/json
+  fields:
+  - {name: statusCode, type: integer, description: HTTP status code.}
+  - {name: code, type: string, description: Machine-readable error code string.}
+  - {name: message, type: string, description: Human-readable description.}
+  - {name: details, type: string, description: Additional detail about the error.}
+  - {name: path, type: string, description: The request endpoint/path.}
+  - {name: identifier, type: string, description: Trace ID to include when contacting support.}
+  - {name: timestamp, type: string, description: When the error occurred.}
+  - {name: violations, type: array, description: Field-level validation violations (field + description).}
+problems:
+- status: 401
+  code: UNAUTHORIZED
+  title: Unauthorized
+  meaning: Missing, malformed, or invalid API token.
+  remediation: "Verify the 'Authorization: Bearer <token>' header is present and correct."
+- status: 402
+  code: QUOTA_EXCEEDED
+  title: Quota exhausted
+  meaning: Your allocated session quota / trial runtime minutes are exhausted.
+  remediation: Contact Gameye support to renew or increase your quota.
+  source_operation: openapi/gameye-session-openapi.yml#session-run
+- status: 403
+  code: FORBIDDEN
+  title: Insufficient token permissions
+  meaning: The API token lacks the required permission scope for this endpoint.
+  remediation: Issue a token with the required scope (e.g. session:start, logs:read).
+- status: 404
+  code: NOT_FOUND
+  title: Resource not found
+  meaning: The referenced region, image, or session ID does not exist or is inaccessible.
+  remediation: Verify the resource exists and the token may access it.
+- status: 409
+  code: CONFLICT
+  title: Session ID conflict
+  meaning: A session with the provided ID already exists (or is already terminated).
+  remediation: Use a unique identifier per session (UUIDv4 recommended).
+  source_operation: openapi/gameye-session-openapi.yml#session-run
+- status: 420
+  code: CAPACITY_UNAVAILABLE
+  title: Capacity unavailable
+  meaning: No capacity in the region, all nodes locked, or too many starts in a short period.
+  remediation: Retry after 2-5 seconds or try a different region.
+  source_operation: openapi/gameye-session-openapi.yml#session-run
+- status: 422
+  code: INVALID_REQUEST
+  title: Invalid request
+  meaning: Invalid request syntax or a missing required field.
+  remediation: Check the request body against the API reference; inspect violations[].
+- status: 500
+  code: INTERNAL_ERROR
+  title: Internal error
+  meaning: Unexpected infrastructure error.
+  remediation: Capture the 'identifier' trace field and contact Gameye support.

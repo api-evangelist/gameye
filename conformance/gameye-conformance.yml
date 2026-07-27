@@ -1,0 +1,29 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gameye-session-openapi.yml
+standards:
+- id: oauth2
+  conforms: false
+  evidence: securityScheme is http bearer token, not oauth2.
+- id: bearer-token
+  conforms: true
+  evidence: securitySchemes.api-token is type http, scheme bearer.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use a custom JSON envelope (statusCode/code/message/details/path/
+    identifier/timestamp/violations), not application/problem+json.
+- id: rfc9727-api-catalog
+  conforms: true
+  evidence: gameye.com publishes /.well-known/api-catalog (linkset).
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi 3.0.0 description published at api.production-gameye.gameye.net/openapi.yaml.
+- id: pagination
+  conforms: false
+  evidence: session-list uses filter query params only; no cursor/offset pagination.
+- id: idempotency
+  conforms: partial
+  evidence: >-
+    session-run accepts a caller-supplied unique session id and returns 409 on
+    a duplicate id (natural-key deduplication); no Idempotency-Key retry header.

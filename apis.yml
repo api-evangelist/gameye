@@ -1,20 +1,100 @@
 aid: gameye
 name: Gameye
-description: Gameye is a company surfaced as a portfolio company of seedcamp and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Gameye is a managed game server orchestration platform for multiplayer game
+  studios, founded in 2017 in Rotterdam (Gameye B.V.). It runs dedicated,
+  containerized game servers across bare metal, cloud, and edge providers behind
+  a single REST API — the Session API. Studios call POST /session with a region
+  and a Docker image; Gameye selects the best available location, starts a
+  container in about half a second, and returns the host IP and mapped ports
+  players connect to. Capacity-based pricing carries no egress fees, and the
+  platform is matchmaker-agnostic (Pragma Engine, Nakama, PlayFab, FlexMatch).
+  Gameye has orchestrated 120M+ sessions with a 99.99% uptime SLA and serves
+  studios including Torn Banner Studios (Chivalry 2) and Remedy Entertainment.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://static.gameye.com/images/android-chrome-512x512.png
 url: https://raw.githubusercontent.com/api-evangelist/gameye/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - seedcamp
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Game Server Hosting
+- Game Server Orchestration
+- Multiplayer
+- Containers
+- Infrastructure
+- Gaming
+- Edge Computing
+- DevOps
+apis:
+- aid: gameye:gameye-artifacts-api
+  name: Gameye Artifacts API
+  description: The Artifacts API from Gameye — 1 operation(s) for artifacts.
+  humanURL: https://gameye.com/docs/api-v2/
+  baseURL: https://api.production-gameye.gameye.net
+  tags:
+  - Artifacts
+  properties:
+  - type: OpenAPI
+    url: openapi/gameye-artifacts-api-openapi.yml
+- aid: gameye:gameye-available-location-api
+  name: Gameye Available Location API
+  description: The Available Location API from Gameye — 1 operation(s) for available location.
+  humanURL: https://gameye.com/docs/api-v2/
+  baseURL: https://api.production-gameye.gameye.net
+  tags:
+  - Available Location
+  properties:
+  - type: OpenAPI
+    url: openapi/gameye-available-location-api-openapi.yml
+- aid: gameye:gameye-logs-api
+  name: Gameye Logs API
+  description: The Logs API from Gameye — 1 operation(s) for logs.
+  humanURL: https://gameye.com/docs/api-v2/
+  baseURL: https://api.production-gameye.gameye.net
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/gameye-logs-api-openapi.yml
+- aid: gameye:gameye-session-api
+  name: Gameye Session API
+  description: The Session API from Gameye — 4 operation(s) for session.
+  humanURL: https://gameye.com/docs/api-v2/
+  baseURL: https://api.production-gameye.gameye.net
+  tags:
+  - Session
+  properties:
+  - type: OpenAPI
+    url: openapi/gameye-session-api-openapi.yml
+- aid: gameye:gameye-tag-api
+  name: Gameye Tag API
+  description: The Tag API from Gameye — 1 operation(s) for tag.
+  humanURL: https://gameye.com/docs/api-v2/
+  baseURL: https://api.production-gameye.gameye.net
+  tags:
+  - Tag
+  properties:
+  - type: OpenAPI
+    url: openapi/gameye-tag-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -22,4 +102,80 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: http://gameye.com
+  url: https://gameye.com
+- type: DeveloperPortal
+  url: https://gameye.com/docs/
+- type: Documentation
+  url: https://gameye.com/docs/api-v2/
+- type: APIReference
+  url: https://gameye.com/docs/api-v2/
+- type: GettingStarted
+  url: https://gameye.com/docs/getting-started/
+- type: Support
+  url: https://gameye.com/docs/support/getting-support/
+- type: Blog
+  url: https://gameye.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/Gameye
+- type: Roadmap
+  url: https://gameye.com/roadmap/
+- type: Pricing
+  url: https://gameye.com/pricing/
+- type: SignUp
+  url: https://trial.gameye.com/
+- type: TermsOfService
+  url: https://gameye.com/terms/
+- type: PrivacyPolicy
+  url: https://gameye.com/privacy/
+- type: StatusPage
+  url: https://gameye.com/status/
+- type: ChangeLog
+  url: https://gameye.com/docs/changelogs/
+- type: ChangeLog
+  url: changelog/gameye-changelog.yml
+- type: Authentication
+  url: authentication/gameye-authentication.yml
+- type: DomainSecurity
+  url: security/gameye-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/gameye-agentic-access.yml
+- type: Packages
+  url: packages/gameye-packages.yml
+- type: SDKs
+  url: packages/gameye-packages.yml
+- type: WellKnown
+  url: well-known/gameye-well-known.yml
+- type: APICatalog
+  url: well-known/gameye-api-catalog.json
+- type: MCPServer
+  url: mcp/gameye-mcp.yml
+- type: LLMsTxt
+  url: llms/gameye-llms.txt
+- type: Conformance
+  url: conformance/gameye-conformance.yml
+- type: ErrorCatalog
+  url: errors/gameye-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/gameye-lifecycle.yml
+- type: Sandbox
+  url: sandbox/gameye-sandbox.yml
+- type: Conventions
+  url: conventions/gameye-conventions.yml
+- type: DataModel
+  url: data-model/gameye-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Allocate a Gameye session and get its connection address
+  url: arazzo/gameye-allocate-session.yml
+- type: Arazzo
+  name: Manage the player roster on a Gameye session
+  url: arazzo/gameye-player-lifecycle.yml
+- type: Arazzo
+  name: Stream logs, stop a Gameye session, and download an artifact
+  url: arazzo/gameye-session-teardown.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

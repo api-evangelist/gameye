@@ -1,0 +1,39 @@
+generated: '2026-07-19'
+method: searched
+source: https://gameye.com/docs/api-v2/
+authentication:
+  style: bearer-token
+  header: 'Authorization: Bearer <token>'
+  ref: authentication/gameye-authentication.yml
+idempotency:
+  supported: partial
+  mechanism: caller-supplied-natural-key
+  detail: >-
+    session-run (POST /session) accepts a caller-supplied unique 'id' (UUIDv4
+    recommended). Re-using an existing id returns 409 CONFLICT, which deduplicates
+    session creation. There is no Idempotency-Key retry header covering all writes.
+pagination:
+  style: filter-only
+  detail: >-
+    session-list (GET /session) is filtered via query params (all, location, image,
+    tag, host, playerCount[lt|gt], filter[<tag>]); no cursor or offset paging.
+metadata:
+  supported: true
+  detail: >-
+    Sessions carry user-defined key/value 'labels' and free-form 'env'; an optional
+    'external_id' associates a customer identifier with a session.
+request_tracing:
+  field: identifier
+  detail: >-
+    Error responses include an 'identifier' trace ID to quote when contacting support.
+versioning:
+  api_current: 1.2.1
+  generations: [Legacy API, API V2]
+  ref: lifecycle/gameye-lifecycle.yml
+error_envelope:
+  format: custom-json
+  ref: errors/gameye-problem-types.yml
+rate_limit_signaling:
+  detail: >-
+    No RateLimit response headers documented. Excessive starts / capacity pressure
+    surface as 420 CAPACITY_UNAVAILABLE with guidance to retry after 2-5 seconds.

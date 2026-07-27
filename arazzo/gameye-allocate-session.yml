@@ -1,0 +1,65 @@
+arazzo: 1.0.1
+info:
+  title: Allocate a Gameye session and get its connection address
+  version: 1.0.0
+  summary: Pick an available region for an image, start a session, and read its host/ports.
+sourceDescriptions:
+- name: gameye
+  url: ../openapi/gameye-session-openapi.yml
+  type: openapi
+workflows:
+- workflowId: allocate-session
+  summary: Find a region, allocate a session, and describe it.
+  inputs:
+    type: object
+    required: [image]
+    properties:
+      image:
+        type: string
+        example: nginx
+      location:
+        type: string
+        example: europe
+      sessionId:
+        type: string
+        example: f7965a22-e327-4541-a30e-8262890d3a29
+  steps:
+  - stepId: find-locations
+    operationId: get-available-locations
+    parameters:
+    - name: image
+      in: path
+      value: $inputs.image
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      locations: $response.body#/locations
+  - stepId: run-session
+    operationId: session-run
+    requestBody:
+      contentType: application/json
+      payload:
+        id: $inputs.sessionId
+        location: $inputs.location
+        image: $inputs.image
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      sessionId: $response.body#/id
+      host: $response.body#/host
+      ports: $response.body#/ports
+  - stepId: describe-session
+    operationId: describe-session
+    parameters:
+    - name: id
+      in: path
+      value: $steps.run-session.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  outputs:
+    sessionId: $steps.run-session.outputs.sessionId
+    host: $steps.run-session.outputs.host
+    ports: $steps.run-session.outputs.ports
+    status: $steps.describe-session.outputs.status

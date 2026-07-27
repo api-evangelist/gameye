@@ -1,0 +1,55 @@
+arazzo: 1.0.1
+info:
+  title: Stream logs, stop a Gameye session, and download an artifact
+  version: 1.0.0
+  summary: Pull a session's logs, terminate it, then download a diagnostic artifact.
+sourceDescriptions:
+- name: gameye
+  url: ../openapi/gameye-session-openapi.yml
+  type: openapi
+workflows:
+- workflowId: session-teardown
+  summary: Collect logs, stop the session, and retrieve an artifact from the container.
+  inputs:
+    type: object
+    required: [sessionId]
+    properties:
+      sessionId:
+        type: string
+        example: c595bc6f-8522-4a62-95cd-8742136643ea
+      artifactPath:
+        type: string
+        example: /home/user/game/crashdump.log
+  steps:
+  - stepId: stream-logs
+    operationId: stream-logs
+    parameters:
+    - name: id
+      in: query
+      value: $inputs.sessionId
+    - name: follow
+      in: query
+      value: false
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: stop-session
+    operationId: session-stop
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: download-artifact
+    operationId: artifacts
+    parameters:
+    - name: session
+      in: query
+      value: $inputs.sessionId
+    - name: path
+      in: query
+      value: $inputs.artifactPath
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    sessionId: $inputs.sessionId

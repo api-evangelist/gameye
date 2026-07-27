@@ -1,0 +1,30 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/Gameye
+packages:
+- language: javascript
+  registry: npm
+  name: "@gameye/sdk"
+  url: https://www.npmjs.com/package/@gameye/sdk
+  install: npm install @gameye/sdk
+  repository: https://github.com/Gameye/gameye-sdk-node
+  version: 0.0.3-0
+  official: true
+  description: Node.js SDK for the Gameye Session API.
+- language: php
+  registry: packagist
+  name: gameye/gameye-sdk-php
+  url: https://packagist.org/packages/gameye/gameye-sdk-php
+  install: composer require gameye/gameye-sdk-php
+  repository: https://github.com/Gameye/gameye-sdk-php
+  version: v2.2.3
+  official: true
+  description: PHP SDK for the Gameye Session API.
+- language: go
+  registry: pkg.go.dev
+  name: github.com/Gameye/gameye-sdk-go
+  url: https://pkg.go.dev/github.com/Gameye/gameye-sdk-go
+  install: go get github.com/Gameye/gameye-sdk-go
+  repository: https://github.com/Gameye/gameye-sdk-go
+  official: true
+  description: Go SDK for the Gameye Session API.

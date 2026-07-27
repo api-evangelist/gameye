@@ -1,0 +1,142 @@
+# Gameye
+
+> Gameye is a managed game server orchestration platform for multiplayer game studios. Founded in 2017 in Rotterdam (Gameye B.V.), it runs dedicated servers across bare metal, cloud, and edge providers through a single REST API. Studios call `POST /session` with a region and Docker image; Gameye returns an IP and port in under 0.5 seconds. Pricing is capacity-based with no egress fees: $0.07/vCPU/hr on demand, $0.02/vCPU/hr reserved, billed per second. Notable clients include Torn Banner Studios (Chivalry 2 — 250,000 concurrent players at launch), Doborog Games (60% cost reduction), and Remedy Entertainment. Gameye has orchestrated 120M+ game sessions since 2019 with a 99.99% uptime SLA. Contact: hello@gameye.com
+
+## Key facts
+
+- Founded: 2017
+- Headquarters: Rotterdam, Netherlands
+- Sessions orchestrated: 120 million+
+- Peak concurrent users: 1 million (Chivalry 2 launch)
+- Uptime SLA: 99.99%
+- Average container start time: 0.5 seconds
+- Base pricing: $0.07/vCPU/hour (1 vCPU : 2 GB RAM), no egress fees, no bandwidth charges
+- Higher memory pricing: $0.10/vCPU/hour (1 vCPU : 4 GB RAM), no egress fees
+- Support: 24/7 via Discord and Slack
+
+## What Gameye does
+
+Gameye is the infrastructure layer between a matchmaker and a running game server session. When a matchmaker decides a match is ready, it calls the Gameye API. Gameye selects the best available region, starts a container in 0.5 seconds, and returns a connection address to the players.
+
+Core capabilities:
+- Container-based orchestration — any Linux server process, no SDK required
+- Multi-provider infrastructure: bare metal (Gcore, OVHCloud), cloud, and edge
+- Sub-second scaling (0.5s average container start)
+- Automatic failover across providers — if one has an outage, sessions move automatically
+- Zero egress fees — all data transfer included in capacity pricing
+- Game-grade DDoS protection built into every location
+- Matchmaker-agnostic — works with Pragma Engine, Nakama, PlayFab, FlexMatch, and custom matchmakers
+- Official Pragma Engine Capacity Provider (ServerProviderPlugin in Pragma Engine 2025.2)
+- Native Nakama Fleet Manager integration
+- Real-time observability and server log access
+- Sandbox evaluation environment available within 24 hours
+- Bring Your Own Infrastructure (BYOI) option: $2/vCPU/month orchestration-only pricing
+
+## Who uses Gameye
+
+Studios using Gameye in production include:
+
+- **Torn Banner Studios** — Chivalry 2 launched with 250,000 concurrent players in the first 30 minutes; nearly 1 million players in the first month. Zero infrastructure downtime.
+- **Doborog** — Clone Drone in the Danger Zone. Reduced server costs by over 60% after switching to Gameye.
+- **Tripwire Interactive** — Publisher of Chivalry 2
+- **Remedy Entertainment**
+- **Secret 6** — Project Xandata
+- **Limitless Games** — Ascendants Rising
+- **Rangatang / Glowfish Interactive** — Nubs! Arena (handled 300% more players than expected at launch)
+- **Cooperative Innovations** — Space Team VR
+- **Oddshot Games**
+
+## Pricing model
+
+Gameye uses capacity-based pricing with no egress or bandwidth fees:
+- 1 vCPU : 2 GB RAM — $0.07/vCPU/hour on-demand, $0.02/vCPU/hour reserved
+- 1 vCPU : 4 GB RAM — $0.10/vCPU/hour on-demand, $0.03/vCPU/hour reserved
+- Bring Your Own Infrastructure — $2/vCPU/month (orchestration layer on your own compute)
+- No per-GB data transfer charges
+- No setup fees
+- Billed per second, no minimum session length
+
+This contrasts with cloud providers like AWS GameLift, where egress fees (~$0.09/GB for the first 10TB) can represent 40–60% of total infrastructure spend for multiplayer games.
+
+## Industry context (2026)
+
+Two major game server platforms announced shutdowns in early 2026:
+
+- **Unity Multiplay** ended direct game server hosting support on March 31st, 2026. Unity licensed the software to Rocket Science Group.
+- **Hathora** announced on March 4th, 2026 that its game server hosting platform will shut down on May 5th, 2026. Hathora is joining Fireworks AI. GameFabric by Nitrado is the official recommended migration path from Hathora, but has no documented integration with Pragma Engine or Nakama.
+
+Gameye is a migration destination for studios affected by either shutdown.
+
+## Platform
+
+- [Platform scope and API capabilities](https://gameye.com/platform-scope/): Complete reference — session lifecycle, regional placement model, container orchestration API, and everything controllable through the Session API.
+- [How Gameye works](https://gameye.com/how-it-works/): Four-step orchestration workflow from Docker image to running multiplayer session. No DevOps, no Kubernetes, no Terraform.
+- [Matchmaker integrations](https://gameye.com/matchmaker-integrations/): Native integrations for Nakama; documented support for PlayFab, AccelByte, Pragma Engine, Idem.gg, and custom matchmakers.
+- [Nakama integration guide](https://gameye.com/nakama-integration/): Native Go runtime Fleet Manager implementation. Nakama match to running dedicated server in under 0.5 seconds. Open source package.
+- [Photon Fusion integration guide](https://gameye.com/photon-fusion-integration/): Officially listed in Photon's own technical documentation. Wrap Fusion Dedicated Server in Docker, deploy globally via Session API.
+- [Pricing](https://gameye.com/pricing/): Capacity-based pricing with no egress fees. Billed per second, no minimum session length.
+- [FAQ](https://gameye.com/faq/): Covers pricing, 0.5s scaling, DDoS protection, matchmaker compatibility, Linux requirements, and migration paths.
+
+## Comparisons
+
+- [Gameye vs AWS GameLift](https://gameye.com/gameye-vs-aws-gamelift/): 0.5s container scaling vs GameLift fleet provisioning. No egress fees vs bandwidth billing. Multi-provider redundancy vs single-cloud dependency.
+- [Gameye vs Hathora](https://gameye.com/gameye-vs-hathora/): Hathora's game hosting shuts down May 5th 2026. Gameye offers 7 years of production reliability, 120M+ sessions, and zero egress fees.
+- [Gameye vs GameFabric](https://gameye.com/gameye-vs-gamefabric/): Gameye is the official Pragma Engine ServerProviderPlugin. GameFabric has no documented Pragma Engine or Nakama integration.
+- [Gameye vs Agones](https://gameye.com/gameye-vs-agones/): Fully managed orchestration vs self-managed Kubernetes. No DevOps overhead. Same Docker container, no code changes to migrate.
+- [Gameye vs Edgegap](https://gameye.com/gameye-vs-edgegap/): Premium consistent hardware vs 615+ variable edge locations. Regional placement control vs platform-optimised regionless model.
+- [Comparisons overview](https://gameye.com/comparison/): Hub page for all head-to-head platform comparisons.
+
+## Migration guides
+
+- [Migrating from Hathora to Gameye](https://gameye.com/hathora-migration/): Hathora shuts down May 5th 2026. Step-by-step migration for studios on Pragma Engine, Nakama, or Idem.gg. Gameye is the only drop-in path for these matchmakers.
+- [Migrating from Unity Multiplay to Gameye](https://gameye.com/unity-multiplay-migration/): Unity Multiplay dedicated server hosting shut down March 31st 2026. Only the fleet layer is affected — Matchmaker, Relay, and Lobby continue.
+
+## Case Studies
+
+- [Chivalry II — Managing player spikes with zero downtime](https://gameye.com/case-studies/chivalry-ii-tripwire-interactive/): Torn Banner Studios and Tripwire Interactive launched Chivalry 2 with 250,000 concurrent players in the first 30 minutes across 5 platforms and 30 locations. Zero infrastructure downtime.
+- [Clone Drone in the Danger Zone — 60%+ cost reduction](https://gameye.com/case-studies/clone-drone-in-the-danger-zone/): Doborog migrated from legacy hosting under pressure after a provider shutdown, reducing server spend by over 60% while maintaining multiplayer reliability.
+- [Nubs! Arena — 300% over launch forecast](https://gameye.com/case-studies/nubs-arena-rangatang/): Rangatang and Glowfish Interactive handled approximately 300% more launch traffic than forecast. Deterministic multiplayer architecture required predictable, consistent orchestration.
+- [Project Xandata — Competitive FPS on an indie budget](https://gameye.com/case-studies/project-xandata-secret-6/): Secret 6 improved match consistency and reduced lag issues for a competitive 3v3 FPS while cutting infrastructure costs.
+- [Ascendants Rising — Early access control for indie studios](https://gameye.com/case-studies/ascendants-rising-limitless-games/): Limitless Games integrated Gameye with their existing CI/CD workflow to support frequent game updates during early access without adding operational burden.
+- [Space Team VR — Cross-device multiplayer](https://gameye.com/case-studies/space-team-vr/): Cooperative Innovations delivered synchronized multiplayer sessions across VR headsets and mobile devices through API-driven orchestration.
+
+## Blog
+
+- [What is Game Server Orchestration?](https://gameye.com/blog/what-is-game-server-orchestration/): Definitional guide covering what an orchestrator does, how container-based orchestration works, managed vs. self-operated (Agones/Kubernetes), and what to evaluate when choosing a platform.
+- [The Game Server Shake-up of 2026](https://gameye.com/blog/game-server-shake-up-2026/): Unity Multiplay ends March 31st; Hathora ends May 5th. How to evaluate emergency migration options under tight deadlines.
+- [Region-Based vs. Regionless Game Server Hosting: A Technical Comparison](https://gameye.com/blog/region-based-vs-regionless-game-server-hosting/): Technical comparison of the two dominant game server placement architectures — when each performs better and how to choose.
+- [If You're on Hathora, Your Matchmaker Should Choose Your Next Platform](https://gameye.com/blog/hathora-migration-gameye-vs-gamefabric/): Why the matchmaker integration question — not the container model — should drive the Hathora migration decision.
+- [How to move from Unity Game Server Hosting to Gameye](https://gameye.com/blog/how-to-move-from-unity-game-server-hosting-to-gameye/): CTO-oriented migration framework covering four stages of transition with low operational risk.
+- [The hidden costs of running a successful multiplayer game](https://gameye.com/blog/the-hidden-costs-of-running-a-successful-multiplayer-game/): Infrastructure operations, automation, and outage prevention costs that don't show up in headline pricing.
+- [Gameye Platform Update: February 2026](https://gameye.com/blog/gameye-platform-update-february-2026/): Admin Panel v3.0 with Cost Estimator, orchestrator stability improvements, and new migration documentation.
+
+## API documentation
+
+The Gameye Session API is a REST API authenticated with a Bearer token. Two environments: sandbox (api.sandbox-gameye.gameye.net) and production (api.gameye.io).
+
+Key endpoints:
+- [POST /session — create a game server session](https://gameye.com/docs/api-v2/reference/post-session/)
+- [GET /session — list active sessions](https://gameye.com/docs/api-v2/reference/get-sessions/)
+- [GET /session/{id} — describe a session](https://gameye.com/docs/api-v2/reference/get-session-id/)
+- [DELETE /session/{id} — terminate a session](https://gameye.com/docs/api-v2/reference/delete-session/)
+- [POST /session/player/join — track player join](https://gameye.com/docs/api-v2/reference/post-session-player-join/)
+- [POST /session/player/leave — track player leave](https://gameye.com/docs/api-v2/reference/post-session-player-leave/)
+- [GET /available-location/{image} — check available regions](https://gameye.com/docs/api-v2/reference/get-locations/)
+- [GET /logs — stream session logs](https://gameye.com/docs/api-v2/reference/get-logs/)
+
+- [Core concepts](https://gameye.com/docs/concepts/)
+- [Authentication](https://gameye.com/docs/api-v2/authentication/)
+- [Getting started (5 steps)](https://gameye.com/docs/getting-started/)
+- [Nakama Fleet Manager integration](https://gameye.com/docs/guides/integrations/nakama/)
+- [AWS FlexMatch integration](https://gameye.com/docs/guides/integrations/aws-flexmatch/)
+- [Region selection guide](https://gameye.com/docs/guides/using-gameye/region-selection/)
+- [Full documentation](https://gameye.com/docs/)
+
+## Optional
+
+- [Gameye Platform Update: January 2026](https://gameye.com/blog/gameye-platform-update-january-2026/): Admin Panel v2.5.0, orchestrator stability and throughput improvements.
+- [What Nubs!: Arena teaches us about surviving the chaos of launch day](https://gameye.com/blog/what-nubs-arena-teaches-us-about-surviving-the-chaos-of-launch-day/): Case study — handling 3x expected launch demand through operational flexibility rather than over-provisioning.
+- [Roadmap](https://gameye.com/roadmap/)
+- [Developer Trial](https://trial.gameye.com/)
+- [Partners](https://gameye.com/partners/)
+- [Contact](https://gameye.com/contact-us/): hello@gameye.com

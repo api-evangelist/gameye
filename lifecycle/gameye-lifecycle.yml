@@ -1,0 +1,22 @@
+generated: '2026-07-19'
+method: searched
+source: https://gameye.com/docs/changelogs/
+versioning:
+  api_spec: semver
+  api_current: 1.2.1
+  api_generations: [Legacy API, API V2]
+  platform: monthly date-based platform updates
+  docs: https://gameye.com/docs/api-v2/
+sla:
+  uptime_target: '99.99%'
+  source: https://gameye.com/llms.txt
+status_page: https://gameye.com/status/
+health_endpoint: https://api.gameye.io/health
+changelog: https://gameye.com/docs/changelogs/
+roadmap: https://gameye.com/roadmap/
+deprecation:
+  policy_url: null
+  note: >-
+    No formal deprecation/Sunset (RFC 8594) policy published. A prior "Legacy API"
+    generation exists alongside API V2, but no dated sunset commitment was found.
+deprecated_operations: []

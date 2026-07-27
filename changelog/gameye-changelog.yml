@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: searched
+source: https://gameye.com/docs/changelogs/
+scheme: monthly-date-platform-updates
+api_spec_version: 1.2.1
+notes: >-
+  Recent platform changes are published as dated monthly "Platform Update" posts;
+  the Session API description itself is versioned with semver (currently 1.2.1).
+entries:
+- version: March 2026 Platform Update
+  date: '2026-03'
+  highlights: [Warm pools, tags management, container metrics]
+- version: February 2026 Platform Update
+  date: '2026-02'
+  highlights: [Dashboard improvements, stability enhancements]
+- version: January 2026 Platform Update
+  date: '2026-01'
+  highlights: [Orchestrator V2 migration, new API features]
+- version: Smarthost (BETA)
+  date: '2023-07'
+  highlights: [Predicts player demand and preloads sessions to create a buffer]
+- version: Session-locking fix
+  date: '2022-10'
+  highlights: [Fixed rare case where servers could overload themselves]
+- version: Env var references
+  date: '2022-05'
+  highlights: [Custom environment variables can now reference Gameye environment variables]

@@ -1,0 +1,42 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/gameye-session-openapi.yml
+note: >-
+  No official hosted/remote Gameye MCP server was found (npm @modelcontextprotocol,
+  MCP registries, or Gameye docs). This is a candidate tool list derived from the
+  Session API operations, one tool per operationId.
+server:
+  name: gameye
+  transport: http
+tools:
+- name: session_run
+  description: Allocate a new containerized game session in a region.
+  source_operation: openapi/gameye-session-openapi.yml#session-run
+- name: session_list
+  description: List active game sessions tied to the API token.
+  source_operation: openapi/gameye-session-openapi.yml#session-list
+- name: describe_session
+  description: Describe a single session by ID.
+  source_operation: openapi/gameye-session-openapi.yml#describe-session
+- name: session_stop
+  description: Stop a running session by terminating its container.
+  source_operation: openapi/gameye-session-openapi.yml#session-stop
+- name: join_session
+  description: Register one or more player IDs as having joined a session.
+  source_operation: openapi/gameye-session-openapi.yml#join-session
+- name: leave_session
+  description: Remove one or more player IDs from a session.
+  source_operation: openapi/gameye-session-openapi.yml#leave-session
+- name: get_available_locations
+  description: List locations currently able to host a given image, with pingable IPs.
+  source_operation: openapi/gameye-session-openapi.yml#get-available-locations
+- name: tag_exists
+  description: Check whether an image tag exists in a region across the Gameye fleet.
+  source_operation: openapi/gameye-session-openapi.yml#tag-exists
+- name: stream_logs
+  description: Stream stdout/stderr logs written by a session's game server.
+  source_operation: openapi/gameye-session-openapi.yml#stream-logs
+- name: download_artifact
+  description: Download a file or folder artifact from a terminated session's container.
+  source_operation: openapi/gameye-session-openapi.yml#artifacts

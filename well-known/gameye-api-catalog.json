@@ -1,0 +1,44 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://api.gameye.io/",
+      "service-desc": [
+        {
+          "href": "https://api.production-gameye.gameye.net/openapi.yaml",
+          "type": "application/yaml"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://gameye.com/docs/api-v2/",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://api.gameye.io/health",
+          "type": "application/json"
+        },
+        {
+          "href": "https://gameye.com/status/",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "https://api.sandbox-gameye.gameye.net/",
+      "service-desc": [
+        {
+          "href": "https://api.production-gameye.gameye.net/openapi.yaml",
+          "type": "application/yaml"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://gameye.com/docs/api-v2/",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

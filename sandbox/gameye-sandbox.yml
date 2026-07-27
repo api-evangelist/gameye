@@ -1,0 +1,25 @@
+generated: '2026-07-19'
+method: searched
+source: https://gameye.com/docs/api-v2/
+environments:
+- name: sandbox
+  base_url: https://api.sandbox-gameye.gameye.net
+  description: Main sandbox environment; shares the same OpenAPI description as production.
+- name: production
+  base_url: https://api.production-gameye.gameye.net
+  description: Main production environment.
+alias_host: https://api.gameye.io
+access:
+  self_serve_trial: https://trial.gameye.com/
+  evaluation: >-
+    A sandbox evaluation environment is made available within 24 hours of a
+    developer trial request (per gameye.com/llms.txt).
+  api_tokens: Created per-user in the Gameye Admin Panel (shown once at creation).
+test_values:
+  note: >-
+    Gameye's docs use these placeholder values in examples; they are illustrative,
+    not live credentials. Never treat them as real secrets.
+  example_image: nginx
+  example_location: europe
+  example_session_id: f7965a22-e327-4541-a30e-8262890d3a29
+  example_ttl: ['1m', '1h', '2h30m']
