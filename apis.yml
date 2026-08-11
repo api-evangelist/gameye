@@ -101,6 +101,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/gameye-session-overlay.yaml
 - type: Website
   url: https://gameye.com
 - type: DeveloperPortal
