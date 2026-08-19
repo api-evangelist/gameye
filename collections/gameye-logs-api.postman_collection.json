@@ -1,0 +1,294 @@
+{
+  "item": [
+    {
+      "id": "a7ecad36-1c68-437d-a09f-9014eb6a178e",
+      "name": "Logs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1ffa31ae-5bb5-4f86-bf96-0344ae0de750",
+          "name": "Get logs",
+          "request": {
+            "name": "Get logs",
+            "description": {
+              "content": "Streams the output that the game server writes. You can use it to debug server issues.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "follow",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f7a0b011-77dd-4ecf-9db5-9ecda47fd181",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "follow",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c25563a8-dce5-4c1b-80ff-2cfa6578e6e1",
+              "name": "You are not authorized. Make sure your bearer token is correct.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "follow",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 9379,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad2f9c58-cd70-4d8c-9b7c-b54931f03524",
+              "name": "Your API token may not have the required permissions to invoke this endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "follow",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 7982,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "735cae6e-1b98-460b-b67f-6f670a471a99",
+              "name": "That session doesn't seem to exist. Double-check the ID.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "follow",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 7982,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox-gameye.gameye.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "81eb4418-5051-445d-9727-45886e9e437b",
+    "name": "Gameye Session Artifacts Logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.\n# Authentication\nAll endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.\nFor example: ```Authorization: Bearer <token>```\n",
+      "type": "text/plain"
+    }
+  }
+}

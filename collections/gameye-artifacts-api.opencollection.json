@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gameye Session Artifacts API",
+    "version": "1.2.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artifacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download an artifact file from the underlying container.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox-gameye.gameye.net/artifacts",
+            "params": [
+              {
+                "name": "session",
+                "value": "",
+                "type": "query",
+                "description": "The id of the session to download an artifact from.\n"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "The local path inside the container to the target file or folder requested\nfor download.\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiates a download of an artifact which could be a file or a folder inside the underlying\ncontainer. The path should be an absolute Unix path to a specific file or folder.\n\nThe artifact will be provided in the form of a .tar.gz archive that contains your requested\nfile or folder. Please limit your download in size to a maximum of 100mb.\n\nPlease note that the artifact is only available for download after the session has been\nterminated and will be downloaded directly from the container itself.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -2,10 +2,9 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: openapi/gameye-session-openapi.yml
-note: >-
-  No official hosted/remote Gameye MCP server was found (npm @modelcontextprotocol,
-  MCP registries, or Gameye docs). This is a candidate tool list derived from the
-  Session API operations, one tool per operationId.
+note: No official hosted/remote Gameye MCP server was found (npm @modelcontextprotocol, MCP registries,
+  or Gameye docs). This is a candidate tool list derived from the Session API operations, one tool per
+  operationId.
 server:
   name: gameye
   transport: http
@@ -40,3 +39,9 @@ tools:
 - name: download_artifact
   description: Download a file or folder artifact from a terminated session's container.
   source_operation: openapi/gameye-session-openapi.yml#artifacts
+deployment:
+  mode: none
+  verified: derived
+  tools: 10
+  checked: '2026-08-12'
+  source: catalog MCP census

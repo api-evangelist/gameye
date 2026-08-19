@@ -1,0 +1,437 @@
+{
+  "item": [
+    {
+      "id": "28b8048d-5f9d-4d59-be96-7be10e728d76",
+      "name": "Tag",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "764fb9ed-0115-41eb-b64b-aafc96a688b3",
+          "name": "Check if tag exists in the Gameye fleet",
+          "request": {
+            "name": "Check if tag exists in the Gameye fleet",
+            "description": {},
+            "url": {
+              "path": [
+                "tag",
+                ":region",
+                ":image",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "region",
+                  "description": "(Required) The name of the region"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "image",
+                  "description": "(Required) The id of the image"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "version",
+                  "description": "(Required) The image version otherwise known as the Docker 'tag'."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "06f1b4a5-f706-4b14-931f-4f73a6cdf403",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tag",
+                    ":region",
+                    ":image",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region",
+                      "description": "(Required) The name of the region"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "image",
+                      "description": "(Required) The id of the image"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) The image version otherwise known as the Docker 'tag'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"exists\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7de74a28-69b7-44f3-a6d1-7efde25b3c8c",
+              "name": "Bad request.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tag",
+                    ":region",
+                    ":image",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region",
+                      "description": "(Required) The name of the region"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "image",
+                      "description": "(Required) The id of the image"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) The image version otherwise known as the Docker 'tag'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 9146,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e04de38-77ba-4001-98bb-a1b456376233",
+              "name": "You are not authorized. Please make sure that\nthe included bearer token is correct.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tag",
+                    ":region",
+                    ":image",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region",
+                      "description": "(Required) The name of the region"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "image",
+                      "description": "(Required) The id of the image"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) The image version otherwise known as the Docker 'tag'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8669,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd12fca6-b52f-45fc-b557-803d1e3f2c87",
+              "name": "Your API token may not have the required permissions to invoke this endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tag",
+                    ":region",
+                    ":image",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region",
+                      "description": "(Required) The name of the region"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "image",
+                      "description": "(Required) The id of the image"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) The image version otherwise known as the Docker 'tag'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8669,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0655d599-4e18-48aa-a852-ab75b33b958d",
+              "name": "Image not found or you are not authorized to use this image.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tag",
+                    ":region",
+                    ":image",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region",
+                      "description": "(Required) The name of the region"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "image",
+                      "description": "(Required) The id of the image"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) The image version otherwise known as the Docker 'tag'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8669,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox-gameye.gameye.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a9e7706e-90d5-448d-9f12-3ef49423219b",
+    "name": "Gameye Session Artifacts Tag API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.\n# Authentication\nAll endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.\nFor example: ```Authorization: Bearer <token>```\n",
+      "type": "text/plain"
+    }
+  }
+}

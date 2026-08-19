@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gameye Artifacts Session API",
+    "version": "1.2.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists a collection of active sessions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox-gameye.gameye.net/session",
+            "params": [
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return all sessions regardless of status in the response. \nThe default value for this is 'false', which would only return running sessions.\n"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by location.\n"
+              },
+              {
+                "name": "image",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by image.\n"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by tag.\n"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by host IP address.\n"
+              },
+              {
+                "name": "playerCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all of the active sessions that are tied to your API token. Note that it only returns sessions that are active. Those that have already been  stopped, will not be included.\n"
+        },
+        {
+          "info": {
+            "name": "session-run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox-gameye.gameye.net/session",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Allocate a new game session in a specific region. Each session is to be identified by a unique identifier that is provided by the caller. It is  recommended to use a UUID.\nIn case a warm pool is configured for the specified region and image, an already spun up session will be taken from the pool instead and the given set of program arguments, environment variables and additional labels in the HTTP request will be ignored. Sessions managed by a warm pool will always use the same static set of pro"
+        },
+        {
+          "info": {
+            "name": "Describes a single session.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox-gameye.gameye.net/session/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the session."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a single session by ID.\n"
+        },
+        {
+          "info": {
+            "name": "session-stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox-gameye.gameye.net/session/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the session."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stops an active session from running by killing the underlying container. The container is killed by sending in a SIGTERM signal.\n"
+        },
+        {
+          "info": {
+            "name": "join-session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sandbox-gameye.gameye.net/session/player/join",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "leave-session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox-gameye.gameye.net/session/player/leave",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

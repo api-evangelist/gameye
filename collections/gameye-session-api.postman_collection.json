@@ -1,0 +1,1924 @@
+{
+  "item": [
+    {
+      "id": "63fe9772-a37d-4457-894b-f10b60408925",
+      "name": "Session",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d41c3461-323d-44f4-b82d-fdeaa7099e73",
+          "name": "session-run",
+          "request": {
+            "name": "session-run",
+            "description": {
+              "content": "Allocate a new game session in a specific region. Each session is to be identified by a unique identifier that is provided by the caller. It is  recommended to use a UUID.\nIn case a warm pool is configured for the specified region and image, an already spun up session will be taken from the pool instead and the given set of program arguments, environment variables and additional labels in the HTTP request will be ignored. Sessions managed by a warm pool will always use the same static set of program arguments and environment variables. The warm pool will then as soon as possible try to replenish itself. If the warm pool is exhausted, a cold allocation will occur as normal.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location\": \"<string>\",\n  \"image\": \"<string>\",\n  \"id\": \"<string>\",\n  \"env\": {\n    \"key_0\": \"<string>\"\n  },\n  \"args\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"restart\": \"<boolean>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"version\": \"<string>\",\n  \"ttl\": \"<string>\",\n  \"external_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62927595-3a42-46f1-b264-2283805afecd",
+              "name": "A session is running on a machine in the provided region.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"europe\",\n  \"image\": \"my-very-special-game\",\n  \"env\": {\n    \"my-secret\": \"<my_secret_value\"\n  },\n  \"args\": [\n    \"--max-players=8\"\n  ],\n  \"labels\": {\n    \"my-example-tag\": \"1\",\n    \"another-example-tag\": \"3\"\n  },\n  \"restart\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"host\": \"a.b.c.d\",\n  \"ports\": [\n    {\n      \"type\": \"tcp\",\n      \"container\": 80,\n      \"host\": 49159\n    },\n    {\n      \"type\": \"tcp\",\n      \"container\": 80,\n      \"host\": 49159\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "624c2712-e22f-4e72-b4b8-5fde4fc62b16",
+              "name": "You are not authorized to run a session. Please make sure that the included bearer token is correct.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"europe\",\n  \"image\": \"my-very-special-game\",\n  \"env\": {\n    \"my-secret\": \"<my_secret_value\"\n  },\n  \"args\": [\n    \"--max-players=8\"\n  ],\n  \"labels\": {\n    \"my-example-tag\": \"1\",\n    \"another-example-tag\": \"3\"\n  },\n  \"restart\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 9492,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1e17a37-2a73-4a48-b6ee-67b6a3f33e54",
+              "name": "You have exhausted your quota.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"europe\",\n  \"image\": \"my-very-special-game\",\n  \"env\": {\n    \"my-secret\": \"<my_secret_value\"\n  },\n  \"args\": [\n    \"--max-players=8\"\n  ],\n  \"labels\": {\n    \"my-example-tag\": \"1\",\n    \"another-example-tag\": \"3\"\n  },\n  \"restart\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e139702-e2f1-4e62-9e5b-04ee9da75974",
+              "name": "Your API token may not have the required permissions to invoke this endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"europe\",\n  \"image\": \"my-very-special-game\",\n  \"env\": {\n    \"my-secret\": \"<my_secret_value\"\n  },\n  \"args\": [\n    \"--max-players=8\"\n  ],\n  \"labels\": {\n    \"my-example-tag\": \"1\",\n    \"another-example-tag\": \"3\"\n  },\n  \"restart\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6f889f8-4bc3-4841-9202-895c144dbd5b",
+              "name": "The request contains a region or application that does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"europe\",\n  \"image\": \"my-very-special-game\",\n  \"env\": {\n    \"my-secret\": \"<my_secret_value\"\n  },\n  \"args\": [\n    \"--max-players=8\"\n  ],\n  \"labels\": {\n    \"my-example-tag\": \"1\",\n    \"another-example-tag\": \"3\"\n  },\n  \"restart\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11410ec8-05be-4ce6-90b8-c59a3d62060f",
+              "name": "Cannot start a session with the provided id. Please use a unique identifier for your session. It is recommended to use a UUID.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"europe\",\n  \"image\": \"my-very-special-game\",\n  \"env\": {\n    \"my-secret\": \"<my_secret_value\"\n  },\n  \"args\": [\n    \"--max-players=8\"\n  ],\n  \"labels\": {\n    \"my-example-tag\": \"1\",\n    \"another-example-tag\": \"3\"\n  },\n  \"restart\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b33694cc-1783-4ba0-9261-b6e9b54be345",
+              "name": "This session can currently not be started in the provided region. This could also be the result of starting too many sessions in a short period of time.  Please try again later!\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"europe\",\n  \"image\": \"my-very-special-game\",\n  \"env\": {\n    \"my-secret\": \"<my_secret_value\"\n  },\n  \"args\": [\n    \"--max-players=8\"\n  ],\n  \"labels\": {\n    \"my-example-tag\": \"1\",\n    \"another-example-tag\": \"3\"\n  },\n  \"restart\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 420,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66ea401a-fc52-4cdb-ac34-4bef095c7144",
+              "name": "Bad request. This may imply that the given request has invalid syntax.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"europe\",\n  \"image\": \"my-very-special-game\",\n  \"env\": {\n    \"my-secret\": \"<my_secret_value\"\n  },\n  \"args\": [\n    \"--max-players=8\"\n  ],\n  \"labels\": {\n    \"my-example-tag\": \"1\",\n    \"another-example-tag\": \"3\"\n  },\n  \"restart\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4e6d4c5-812a-4d4d-b890-75d70c1fe087",
+          "name": "Lists a collection of active sessions.",
+          "request": {
+            "name": "Lists a collection of active sessions.",
+            "description": {
+              "content": "Lists all of the active sessions that are tied to your API token. Note that it only returns sessions that are active. Those that have already been  stopped, will not be included.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "all",
+                  "value": "<boolean>",
+                  "description": "Whether to return all sessions regardless of status in the response. \nThe default value for this is 'false', which would only return running sessions.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Filter results by location.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>",
+                  "description": "Filter results by image.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Filter results by tag.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "host",
+                  "value": "<string>",
+                  "description": "Filter results by host IP address.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "playerCount[key_0]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "playerCount[key_1]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[key_0]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "459ffbe7-de9f-4a75-babf-c26d3276009c",
+              "name": "Successfully looked up all of the active sessions that are tied to your API token.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "playerCount[key_0]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "playerCount[key_1]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[key_0]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessions\": [\n    {\n      \"id\": \"f7965a22-e327-4541-a30e-8262890d3a29\",\n      \"image\": \"nginx\",\n      \"location\": \"europe\",\n      \"host\": \"a.b.c.d\",\n      \"created\": 1648472895000,\n      \"port\": {\n        \"key_0\": 3271.0632256278304,\n        \"key_1\": 8510.979179108876\n      },\n      \"tag\": \"latest\",\n      \"status\": \"server_unreachable\",\n      \"labels\": {\n        \"key_0\": \"string\"\n      },\n      \"playerCount\": 8419\n    },\n    {\n      \"id\": \"f7965a22-e327-4541-a30e-8262890d3a29\",\n      \"image\": \"nginx\",\n      \"location\": \"europe\",\n      \"host\": \"a.b.c.d\",\n      \"created\": 1648472895000,\n      \"port\": {\n        \"key_0\": 1026.9857648307889,\n        \"key_1\": 3200.191914598749\n      },\n      \"tag\": \"latest\",\n      \"status\": \"dead\",\n      \"labels\": {\n        \"key_0\": \"string\"\n      },\n      \"playerCount\": 2811\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe514964-9b82-449c-b3eb-81b6134a6dc8",
+              "name": "You are not authorized to fetch a list of active sessions. Please make sure that the included bearer token is correct.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "playerCount[key_0]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "playerCount[key_1]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[key_0]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08f67485-a4fa-4ae0-a7a1-6ec83c6afbdd",
+              "name": "Your API token may not have the required permissions to invoke this endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "playerCount[key_0]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "playerCount[key_1]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[key_0]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96d830fa-d3e9-4058-b821-f01ee00634a4",
+          "name": "Describes a single session.",
+          "request": {
+            "name": "Describes a single session.",
+            "description": {
+              "content": "Describe a single session by ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "session",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "618a4dc2-03bb-4313-b718-ad8db059a62c",
+              "name": "Successfully looked up the specified session.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f7965a22-e327-4541-a30e-8262890d3a29\",\n  \"image\": \"nginx\",\n  \"tag\": \"latest\",\n  \"location\": \"europe\",\n  \"host\": \"a.b.c.d\",\n  \"created\": 1648472895000,\n  \"port\": {\n    \"key_0\": 4507.977708137529\n  },\n  \"status\": \"shuttingdown\",\n  \"labels\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"players\": {\n    \"joined\": [\n      \"string\",\n      \"string\"\n    ],\n    \"joinedCount\": 3728\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b79af16-57ac-43f7-b688-2d129f62daef",
+              "name": "You are not authorized to describe sessions. Please make sure that the included bearer token is correct.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "366e8cf2-06d8-4277-bda9-72467544541c",
+              "name": "Your API token may not have the required permissions to invoke this endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce64dc87-b2b8-4f8b-96dd-62c1967f073d",
+              "name": "The specified session does not exist. Please provide a correct session id.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "026f56d8-3c73-4f0b-82ce-c96e454488ba",
+          "name": "session-stop",
+          "request": {
+            "name": "session-stop",
+            "description": {
+              "content": "Stops an active session from running by killing the underlying container. The container is killed by sending in a SIGTERM signal.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "session",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "716f0b8a-046a-4ca3-84bb-f7ac622bf6d7",
+              "name": "The session has successfully been terminated.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20fffcb4-b9dd-4a6a-837c-15d0f5a1ea8b",
+              "name": "You are not authorized to stop a session. Please make sure that the \nincluded bearer token is correct.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e88d1951-8238-40d6-98f6-463b6b110caa",
+              "name": "Your API token may not have the required permissions to invoke this endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66b7c3ec-3b64-48bf-ba1d-089d718bbb0a",
+              "name": "The specified session does not exist. Please provide a correct session id.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "952fc203-8cf7-4d8c-9435-3e03b1177bbc",
+              "name": "This session has already been terminated.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca80ff77-376d-49ac-84d2-3868a7a0aefc",
+          "name": "join-session",
+          "request": {
+            "name": "join-session",
+            "description": {},
+            "url": {
+              "path": [
+                "session",
+                "player",
+                "join"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session\": \"<string>\",\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c4d763e-eb1e-4a83-962a-98437391c7c7",
+              "name": "One or more player IDs have been registered as having joined this session.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "join"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"session\": \"<string>\",\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1236,\n  \"players\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04e2f502-107d-4033-996d-2cd85bcc58c7",
+              "name": "You are not authorized to start a session. Please make sure that the included bearer token is correct.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "join"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"session\": \"<string>\",\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecc4ef4f-6bb8-4859-a704-d4cddb3571d1",
+              "name": "Your API token may not have the required permissions to invoke this endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "join"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"session\": \"<string>\",\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f817536-bc33-4405-9f75-82f809a69f9a",
+              "name": "The provided session does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "join"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"session\": \"<string>\",\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15fa0b51-c5a6-44bb-8016-ecfdd1aa5ff0",
+              "name": "Bad request. This may imply that the given request has invalid syntax.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "join"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"session\": \"<string>\",\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f006d87-4b27-4f43-9794-b20dd0d59372",
+          "name": "leave-session",
+          "request": {
+            "name": "leave-session",
+            "description": {},
+            "url": {
+              "path": [
+                "session",
+                "player",
+                "leave"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "affe173a-ca9a-40dd-92b5-ba3bb0653d46",
+              "name": "One or more player IDs have been removed from the session.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "leave"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 2186,\n  \"players\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "918216df-c77b-4e6e-96d6-a31836c82402",
+              "name": "You are not authorized to use this endpoint. Please make sure that the included bearer token is correct.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "leave"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11b5056a-7243-4d19-99f5-e6a7d43f8db5",
+              "name": "Your API token may not have the required permissions to invoke this endpoint.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "leave"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a268fe1c-37a2-4d23-a476-2bcfb073508d",
+              "name": "The provided session does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "leave"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a219be4c-101e-4c36-88cb-cf46d27b9c2d",
+              "name": "Bad request. This may imply that the given request has invalid syntax.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "session",
+                    "player",
+                    "leave"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"players\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8564,\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\",\n  \"path\": \"string\",\n  \"identifier\": \"string\",\n  \"timestamp\": \"string\",\n  \"violations\": [\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox-gameye.gameye.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "debb6061-fd48-4237-9ee7-271f5afd2b6c",
+    "name": "Gameye Artifacts Session API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.\n# Authentication\nAll endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.\nFor example: ```Authorization: Bearer <token>```\n",
+      "type": "text/plain"
+    }
+  }
+}

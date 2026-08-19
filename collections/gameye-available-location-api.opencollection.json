@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gameye Session Artifacts Available Location API",
+    "version": "1.2.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Available Location",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of available locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox-gameye.gameye.net/available-location/:image",
+            "params": [
+              {
+                "name": "image",
+                "value": "",
+                "type": "path",
+                "description": "The id of the image"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all locations that are currently able to host your image. This includes an IPV4 address that you may send ICMP ping messages to,  to figure out the latency to this location. Please do not cache this list  anywhere as it may change.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
