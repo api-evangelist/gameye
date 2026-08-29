@@ -4,8 +4,14 @@ info:
   version: 1.0.0
   summary: Pull a session's logs, terminate it, then download a diagnostic artifact.
 sourceDescriptions:
-- name: gameye
-  url: ../openapi/gameye-session-openapi.yml
+- name: artifactsApi
+  url: ../openapi/gameye-artifacts-api-openapi.yml
+  type: openapi
+- name: logsApi
+  url: ../openapi/gameye-logs-api-openapi.yml
+  type: openapi
+- name: sessionApi
+  url: ../openapi/gameye-session-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: session-teardown

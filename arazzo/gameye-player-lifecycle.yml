@@ -4,8 +4,8 @@ info:
   version: 1.0.0
   summary: Start a session, register players joining, then remove players leaving.
 sourceDescriptions:
-- name: gameye
-  url: ../openapi/gameye-session-openapi.yml
+- name: sessionApi
+  url: ../openapi/gameye-session-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: player-lifecycle

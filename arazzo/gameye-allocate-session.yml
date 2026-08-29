@@ -4,8 +4,11 @@ info:
   version: 1.0.0
   summary: Pick an available region for an image, start a session, and read its host/ports.
 sourceDescriptions:
-- name: gameye
-  url: ../openapi/gameye-session-openapi.yml
+- name: availableLocationApi
+  url: ../openapi/gameye-available-location-api-openapi.yml
+  type: openapi
+- name: sessionApi
+  url: ../openapi/gameye-session-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: allocate-session
