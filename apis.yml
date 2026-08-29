@@ -11,6 +11,18 @@ description: >-
   platform is matchmaker-agnostic (Pragma Engine, Nakama, PlayFab, FlexMatch).
   Gameye has orchestrated 120M+ sessions with a 99.99% uptime SLA and serves
   studios including Torn Banner Studios (Chivalry 2) and Remedy Entertainment.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
