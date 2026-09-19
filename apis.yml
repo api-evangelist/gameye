@@ -95,6 +95,8 @@ apis:
   humanURL: https://gameye.com/docs/api-v2/
   baseURL: https://api.production-gameye.gameye.net
   tags:
+  - Sessions
+  tags_raw:
   - Session
   properties:
   - type: OpenAPI
