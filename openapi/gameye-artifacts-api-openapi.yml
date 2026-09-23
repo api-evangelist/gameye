@@ -1,16 +1,14 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Gameye Session Artifacts API
   version: 1.2.1
-  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.
+  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues. The API offers a complete suite of features to host a server based multiplayer game.
 
     # Authentication
 
-    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.
+    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the HTTP header of each request.
 
-    For example: ```Authorization: Bearer <token>```
-
-    '
+    For example: ```Authorization: Bearer ```'
   x-logo:
     url: https://static.gameye.com/images/android-chrome-512x512.png
     altText: Gameye Logo
@@ -25,8 +23,27 @@ paths:
   /artifacts:
     get:
       operationId: artifacts
-      summary: Download an artifact file from the underlying container.
-      description: "Initiates a download of an artifact which could be a file or a folder inside the underlying\ncontainer. The path should be an absolute Unix path to a specific file or folder.\n\nThe artifact will be provided in the form of a .tar.gz archive that contains your requested\nfile or folder. Please limit your download in size to a maximum of 100mb.\n\nPlease note that the artifact is only available for download after the session has been\nterminated and will be downloaded directly from the container itself.\n\nThe artifacts are available for download from the underlying container up until the \ncontainer is removed from its host machine. This means that your logs may or \nmay not be available post-termination.\n"
+      summary: Download an artifact file from the underlying container
+      description: 'Initiates a download of an artifact which could be a file or a folder inside the underlying
+
+        container. The path should be an absolute Unix path to a specific file or folder.
+
+
+        The artifact will be provided in the form of a .tar.gz archive that contains your requested
+
+        file or folder. Please limit your download in size to a maximum of 100mb.
+
+
+        Please note that the artifact is only available for download after the session has been
+
+        terminated and will be downloaded directly from the container itself.
+
+
+        The artifacts are available for download from the underlying container up until the
+
+        container is removed from its host machine. This means that your logs may or
+
+        may not be available post-termination.'
       security:
       - api-token:
         - artifact:read
@@ -88,17 +105,6 @@ paths:
       - Artifacts
 components:
   schemas:
-    FieldViolation:
-      type: object
-      additionalProperties: false
-      required:
-      - field
-      - description
-      properties:
-        field:
-          type: string
-        description:
-          type: string
     ErrorResponse:
       type: object
       required:
@@ -128,6 +134,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldViolation'
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
   securitySchemes:
     api-token:
       type: http

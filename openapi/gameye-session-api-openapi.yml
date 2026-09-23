@@ -1,16 +1,14 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Gameye Artifacts Session API
+  title: Gameye Session API
   version: 1.2.1
-  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.
+  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues. The API offers a complete suite of features to host a server based multiplayer game.
 
     # Authentication
 
-    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.
+    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the HTTP header of each request.
 
-    For example: ```Authorization: Bearer <token>```
-
-    '
+    For example: ```Authorization: Bearer ```'
   x-logo:
     url: https://static.gameye.com/images/android-chrome-512x512.png
     altText: Gameye Logo
@@ -25,11 +23,9 @@ paths:
   /session:
     post:
       operationId: session-run
-      description: 'Allocate a new game session in a specific region. Each session is to be identified by a unique identifier that is provided by the caller. It is  recommended to use a UUID.
+      description: 'Allocate a new game session in a specific region. Each session is to be identified by a unique identifier that is provided by the caller. It is recommended to use a UUID.
 
-        In case a warm pool is configured for the specified region and image, an already spun up session will be taken from the pool instead and the given set of program arguments, environment variables and additional labels in the HTTP request will be ignored. Sessions managed by a warm pool will always use the same static set of program arguments and environment variables. The warm pool will then as soon as possible try to replenish itself. If the warm pool is exhausted, a cold allocation will occur as normal.
-
-        '
+        In case a warm pool is configured for the specified region and image, an already spun up session will be taken from the pool instead and the given set of program arguments, environment variables and additional labels in the HTTP request will be ignored. Sessions managed by a warm pool will always use the same static set of program arguments and environment variables. The warm pool will then as soon as possible try to replenish itself. If the warm pool is exhausted, a cold allocation will occur as normal.'
       security:
       - api-token:
         - session:start
@@ -106,6 +102,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       tags:
       - Session
+      summary: Session run
+      x-summary-source: derived
     get:
       operationId: session-list
       parameters:
@@ -171,10 +169,8 @@ paths:
             '
           additionalProperties:
             type: string
-      summary: Lists a collection of active sessions.
-      description: 'Lists all of the active sessions that are tied to your API token. Note that it only returns sessions that are active. Those that have already been  stopped, will not be included.
-
-        '
+      summary: Lists a collection of active sessions
+      description: Lists all of the active sessions that are tied to your API token. Note that it only returns sessions that are active. Those that have already been stopped, will not be included.
       security:
       - api-token:
         - session:read
@@ -215,10 +211,8 @@ paths:
         schema:
           type: string
         description: The id of the session.
-      summary: Describes a single session.
-      description: 'Describe a single session by ID.
-
-        '
+      summary: Describes a single session
+      description: Describe a single session by ID.
       security:
       - api-token:
         - session:read
@@ -259,9 +253,7 @@ paths:
       - Session
     delete:
       operationId: session-stop
-      description: 'Stops an active session from running by killing the underlying container. The container is killed by sending in a SIGTERM signal.
-
-        '
+      description: Stops an active session from running by killing the underlying container. The container is killed by sending in a SIGTERM signal.
       parameters:
       - name: id
         in: path
@@ -309,6 +301,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       tags:
       - Session
+      summary: Session stop
+      x-summary-source: derived
   /session/player/join:
     put:
       operationId: join-session
@@ -361,6 +355,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       tags:
       - Session
+      summary: Join session
+      x-summary-source: derived
   /session/player/leave:
     delete:
       operationId: leave-session
@@ -413,334 +409,10 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       tags:
       - Session
+      summary: Leave session
+      x-summary-source: derived
 components:
   schemas:
-    FieldViolation:
-      type: object
-      additionalProperties: false
-      required:
-      - field
-      - description
-      properties:
-        field:
-          type: string
-        description:
-          type: string
-    SessionListEntry:
-      type: object
-      required:
-      - id
-      - image
-      - location
-      - host
-      - created
-      - port
-      properties:
-        id:
-          type: string
-          description: 'The unique identifier of the session.
-
-            '
-          example: f7965a22-e327-4541-a30e-8262890d3a29
-          x-order: 1
-        image:
-          type: string
-          description: 'The name of the image of the game that is hosted inside the container.
-
-            '
-          example: nginx
-          x-order: 2
-        tag:
-          type: string
-          description: 'The build tag of the image the container is derived from.
-
-            '
-          example: latest
-          x-order: 3
-        location:
-          type: string
-          description: 'The location or region that the game session is hosted in.
-
-            '
-          example: europe
-          x-order: 4
-        host:
-          type: string
-          description: 'The IP address of the host machine the game session is hosted on.
-
-            '
-          example: a.b.c.d
-          x-order: 5
-        created:
-          type: number
-          description: 'The unix timestamp the session was created in.
-
-            '
-          example: 1648472895000
-          x-order: 6
-        port:
-          type: object
-          description: 'A record of exposed ports for this container.
-
-            '
-          additionalProperties:
-            type: number
-          example:
-            port:
-              80/tcp: 49160
-          x-order: 7
-        status:
-          $ref: '#/components/schemas/SessionStatus'
-          x-order: 8
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-          description: 'The collection of user-defined key/value metadata stored inside the configuration of the session.
-
-            '
-          example:
-            labels:
-              env: '{"GAMEYE_SESSION_ID":"c595bc6f-8522-4a62-95cd-8742136643ea","GAMEYE_HOST":"a.b.c.d"}'
-              tags: '{"my-example-tag":"1","another-example-tag":"3"}'
-          x-order: 9
-        playerCount:
-          type: integer
-          x-order: 10
-    JoinSessionOk:
-      type: object
-      additionalProperties: false
-      required:
-      - count
-      - players
-      properties:
-        count:
-          type: integer
-          description: 'The total amount of players that are in this session.
-
-            '
-        players:
-          type: array
-          description: 'The list of player ID''s to join this session.
-
-            '
-          items:
-            type: string
-    Port:
-      type: object
-      additionalProperties: false
-      required:
-      - type
-      - container
-      - host
-      properties:
-        type:
-          type: string
-          description: 'The type of protocol of this port entry.
-
-            '
-          enum:
-          - tcp
-          - udp
-        container:
-          type: integer
-          description: 'The port of the container that is hosted on the machine.
-
-            '
-          minimum: 1
-          maximum: 65535
-        host:
-          type: integer
-          description: 'The host port for mapping the container port.
-
-            '
-          minimum: 1
-          maximum: 65535
-    SessionRunOk:
-      type: object
-      additionalProperties: false
-      required:
-      - host
-      - ports
-      properties:
-        id:
-          type: string
-          description: 'The generated unique session ID.
-
-            '
-        host:
-          type: string
-          description: 'The IP address of the machine that the session is running on.
-
-            '
-        ports:
-          type: array
-          description: 'The list of mapped ports for this session.
-
-            '
-          items:
-            $ref: '#/components/schemas/Port'
-      example:
-        id: c5c7c507-f5de-443e-b772-af4b444cfc21
-        host: a.b.c.d
-        ports:
-        - type: tcp
-          container: 80
-          host: 49159
-        - type: tcp
-          container: 80
-          host: 49159
-    DescribedSession:
-      type: object
-      required:
-      - id
-      - image
-      - tag
-      - location
-      - host
-      - created
-      - port
-      - status
-      - labels
-      - players
-      properties:
-        id:
-          type: string
-          description: 'The unique identifier of the session.
-
-            '
-          example: f7965a22-e327-4541-a30e-8262890d3a29
-          x-order: 1
-        image:
-          type: string
-          description: 'The name of the image of the game that is hosted inside the container.
-
-            '
-          example: nginx
-          x-order: 2
-        tag:
-          type: string
-          description: 'The build tag of the image the container is derived from.
-
-            '
-          example: latest
-          x-order: 3
-        location:
-          type: string
-          description: 'The location or region that the game session is hosted in.
-
-            '
-          example: europe
-          x-order: 4
-        host:
-          type: string
-          description: 'The IP address of the host machine the game session is hosted on.
-
-            '
-          example: a.b.c.d
-          x-order: 5
-        created:
-          type: number
-          description: 'The unix timestamp the session was created in.
-
-            '
-          example: 1648472895000
-          x-order: 6
-        port:
-          type: object
-          description: 'A record of exposed ports for this container.
-
-            '
-          additionalProperties:
-            type: number
-          example:
-            port:
-              80/tcp: 49160
-          x-order: 7
-        status:
-          $ref: '#/components/schemas/SessionStatus'
-          x-order: 8
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-          description: 'The collection of user-defined key/value metadata stored inside the configuration of the session.
-
-            '
-          example:
-            labels:
-              env: '{"GAMEYE_SESSION_ID":"c595bc6f-8522-4a62-95cd-8742136643ea","GAMEYE_HOST":"a.b.c.d"}'
-              tags: '{"my-example-tag":"1","another-example-tag":"3"}'
-          x-order: 9
-        players:
-          $ref: '#/components/schemas/DescribedSessionPlayers'
-          x-order: 10
-    LeaveSessionOk:
-      type: object
-      additionalProperties: false
-      required:
-      - count
-      - players
-      properties:
-        count:
-          type: integer
-          description: 'The total amount of players that are in this session.
-
-            '
-        players:
-          type: array
-          description: 'The list of player ID''s to leave this session.
-
-            '
-          items:
-            type: string
-    DescribedSessionPlayers:
-      type: object
-      required:
-      - joined
-      - joinedCount
-      properties:
-        joined:
-          type: array
-          items:
-            type: string
-        joinedCount:
-          type: integer
-    LeaveSession:
-      type: object
-      additionalProperties: false
-      required:
-      - players
-      properties:
-        players:
-          type: array
-          description: 'The list of player ID''s to join this session.
-
-            '
-          items:
-            type: string
-    SessionListOk:
-      type: object
-      additionalProperties: false
-      required:
-      - sessions
-      properties:
-        sessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/SessionListEntry'
-            example:
-              sessions:
-              - id: c595bc6f-8522-4a62-95cd-8742136643ea
-                image: my-very-special-game
-                location: frankfurt
-                host: a.b.c.d
-                created: 1648472895000
-                port:
-                  80/tcp: 49160
-                labels:
-                  env: '{"GAMEYE_SESSION_ID":"this-is-my-test-session-103","GAMEYE_HOST":"a.b.c.d"}'
-                  tags: '{"my-example-tag":"1","another-example-tag":"3"}'
     ErrorResponse:
       type: object
       required:
@@ -770,6 +442,47 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldViolation'
+    SessionListOk:
+      type: object
+      additionalProperties: false
+      required:
+      - sessions
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionListEntry'
+            example:
+              sessions:
+              - id: c595bc6f-8522-4a62-95cd-8742136643ea
+                image: my-very-special-game
+                location: frankfurt
+                host: a.b.c.d
+                created: 1648472895000
+                port:
+                  80/tcp: 49160
+                labels:
+                  env: '{"GAMEYE_SESSION_ID":"this-is-my-test-session-103","GAMEYE_HOST":"a.b.c.d"}'
+                  tags: '{"my-example-tag":"1","another-example-tag":"3"}'
+    JoinSessionOk:
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - players
+      properties:
+        count:
+          type: integer
+          description: 'The total amount of players that are in this session.
+
+            '
+        players:
+          type: array
+          description: 'The list of player ID''s to join this session.
+
+            '
+          items:
+            type: string
     SessionRun:
       type: object
       additionalProperties: false
@@ -881,21 +594,21 @@ components:
           my-example-tag: '1'
           another-example-tag: '3'
         restart: false
-    JoinSession:
+    LeaveSessionOk:
       type: object
       additionalProperties: false
       required:
-      - session
+      - count
       - players
       properties:
-        session:
-          type: string
-          description: 'The ID of the session.
+        count:
+          type: integer
+          description: 'The total amount of players that are in this session.
 
             '
         players:
           type: array
-          description: 'The list of player ID''s to join this session.
+          description: 'The list of player ID''s to leave this session.
 
             '
           items:
@@ -915,6 +628,291 @@ components:
       - draining
       - shuttingdown
       - server_unreachable
+    DescribedSession:
+      type: object
+      required:
+      - id
+      - image
+      - tag
+      - location
+      - host
+      - created
+      - port
+      - status
+      - labels
+      - players
+      properties:
+        id:
+          type: string
+          description: 'The unique identifier of the session.
+
+            '
+          example: f7965a22-e327-4541-a30e-8262890d3a29
+          x-order: 1
+        image:
+          type: string
+          description: 'The name of the image of the game that is hosted inside the container.
+
+            '
+          example: nginx
+          x-order: 2
+        tag:
+          type: string
+          description: 'The build tag of the image the container is derived from.
+
+            '
+          example: latest
+          x-order: 3
+        location:
+          type: string
+          description: 'The location or region that the game session is hosted in.
+
+            '
+          example: europe
+          x-order: 4
+        host:
+          type: string
+          description: 'The IP address of the host machine the game session is hosted on.
+
+            '
+          example: a.b.c.d
+          x-order: 5
+        created:
+          type: number
+          description: 'The unix timestamp the session was created in.
+
+            '
+          example: 1648472895000
+          x-order: 6
+        port:
+          type: object
+          description: 'A record of exposed ports for this container.
+
+            '
+          additionalProperties:
+            type: number
+          example:
+            port:
+              80/tcp: 49160
+          x-order: 7
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+          x-order: 8
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: 'The collection of user-defined key/value metadata stored inside the configuration of the session.
+
+            '
+          example:
+            labels:
+              env: '{"GAMEYE_SESSION_ID":"c595bc6f-8522-4a62-95cd-8742136643ea","GAMEYE_HOST":"a.b.c.d"}'
+              tags: '{"my-example-tag":"1","another-example-tag":"3"}'
+          x-order: 9
+        players:
+          $ref: '#/components/schemas/DescribedSessionPlayers'
+          x-order: 10
+    LeaveSession:
+      type: object
+      additionalProperties: false
+      required:
+      - players
+      properties:
+        players:
+          type: array
+          description: 'The list of player ID''s to join this session.
+
+            '
+          items:
+            type: string
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+    DescribedSessionPlayers:
+      type: object
+      required:
+      - joined
+      - joinedCount
+      properties:
+        joined:
+          type: array
+          items:
+            type: string
+        joinedCount:
+          type: integer
+    JoinSession:
+      type: object
+      additionalProperties: false
+      required:
+      - session
+      - players
+      properties:
+        session:
+          type: string
+          description: 'The ID of the session.
+
+            '
+        players:
+          type: array
+          description: 'The list of player ID''s to join this session.
+
+            '
+          items:
+            type: string
+    Port:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - container
+      - host
+      properties:
+        type:
+          type: string
+          description: 'The type of protocol of this port entry.
+
+            '
+          enum:
+          - tcp
+          - udp
+        container:
+          type: integer
+          description: 'The port of the container that is hosted on the machine.
+
+            '
+          minimum: 1
+          maximum: 65535
+        host:
+          type: integer
+          description: 'The host port for mapping the container port.
+
+            '
+          minimum: 1
+          maximum: 65535
+    SessionRunOk:
+      type: object
+      additionalProperties: false
+      required:
+      - host
+      - ports
+      properties:
+        id:
+          type: string
+          description: 'The generated unique session ID.
+
+            '
+        host:
+          type: string
+          description: 'The IP address of the machine that the session is running on.
+
+            '
+        ports:
+          type: array
+          description: 'The list of mapped ports for this session.
+
+            '
+          items:
+            $ref: '#/components/schemas/Port'
+      example:
+        id: c5c7c507-f5de-443e-b772-af4b444cfc21
+        host: a.b.c.d
+        ports:
+        - type: tcp
+          container: 80
+          host: 49159
+        - type: tcp
+          container: 80
+          host: 49159
+    SessionListEntry:
+      type: object
+      required:
+      - id
+      - image
+      - location
+      - host
+      - created
+      - port
+      properties:
+        id:
+          type: string
+          description: 'The unique identifier of the session.
+
+            '
+          example: f7965a22-e327-4541-a30e-8262890d3a29
+          x-order: 1
+        image:
+          type: string
+          description: 'The name of the image of the game that is hosted inside the container.
+
+            '
+          example: nginx
+          x-order: 2
+        tag:
+          type: string
+          description: 'The build tag of the image the container is derived from.
+
+            '
+          example: latest
+          x-order: 3
+        location:
+          type: string
+          description: 'The location or region that the game session is hosted in.
+
+            '
+          example: europe
+          x-order: 4
+        host:
+          type: string
+          description: 'The IP address of the host machine the game session is hosted on.
+
+            '
+          example: a.b.c.d
+          x-order: 5
+        created:
+          type: number
+          description: 'The unix timestamp the session was created in.
+
+            '
+          example: 1648472895000
+          x-order: 6
+        port:
+          type: object
+          description: 'A record of exposed ports for this container.
+
+            '
+          additionalProperties:
+            type: number
+          example:
+            port:
+              80/tcp: 49160
+          x-order: 7
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+          x-order: 8
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: 'The collection of user-defined key/value metadata stored inside the configuration of the session.
+
+            '
+          example:
+            labels:
+              env: '{"GAMEYE_SESSION_ID":"c595bc6f-8522-4a62-95cd-8742136643ea","GAMEYE_HOST":"a.b.c.d"}'
+              tags: '{"my-example-tag":"1","another-example-tag":"3"}'
+          x-order: 9
+        playerCount:
+          type: integer
+          x-order: 10
   securitySchemes:
     api-token:
       type: http

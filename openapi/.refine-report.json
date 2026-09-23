@@ -1,11 +1,7 @@
 {
   "provider": "gameye",
   "sources": [
-    "gameye-artifacts-api-openapi.yml",
-    "gameye-available-location-api-openapi.yml",
-    "gameye-logs-api-openapi.yml",
-    "gameye-session-api-openapi.yml",
-    "gameye-tag-api-openapi.yml"
+    "_original/gameye-session-openapi.yml"
   ],
   "outputs": [
     "gameye-artifacts-api-openapi.yml",
@@ -17,6 +13,31 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "gameye-session-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "gameye-session-openapi.yml: tagged paths POST /session -> Session",
+    "gameye-session-openapi.yml: tagged paths GET /session -> Session",
+    "gameye-session-openapi.yml: tagged paths GET /session/{id} -> Session",
+    "gameye-session-openapi.yml: tagged paths DELETE /session/{id} -> Session",
+    "gameye-session-openapi.yml: tagged paths PUT /session/player/join -> Session",
+    "gameye-session-openapi.yml: tagged paths DELETE /session/player/leave -> Session",
+    "gameye-session-openapi.yml: tagged paths GET /artifacts -> Artifacts",
+    "gameye-session-openapi.yml: tagged paths GET /available-location/{image} -> Available Location",
+    "gameye-session-openapi.yml: tagged paths GET /tag/{region}/{image}/{version} -> Tag",
+    "gameye-session-openapi.yml: tagged paths GET /logs -> Logs",
+    "gameye-session-openapi.yml: declared missing tag: Artifacts",
+    "gameye-session-openapi.yml: declared missing tag: Available Location",
+    "gameye-session-openapi.yml: declared missing tag: Logs",
+    "gameye-session-openapi.yml: declared missing tag: Session",
+    "gameye-session-openapi.yml: declared missing tag: Tag",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "gameye-artifacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gameye-available-location-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gameye-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gameye-session-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gameye-tag-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

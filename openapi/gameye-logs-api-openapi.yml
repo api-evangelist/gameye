@@ -1,16 +1,14 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Gameye Session Artifacts Logs API
+  title: Gameye Session Logs API
   version: 1.2.1
-  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues.  The API offers a complete suite of features to host a server based multiplayer game.
+  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues. The API offers a complete suite of features to host a server based multiplayer game.
 
     # Authentication
 
-    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the  HTTP header of each request.
+    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the HTTP header of each request.
 
-    For example: ```Authorization: Bearer <token>```
-
-    '
+    For example: ```Authorization: Bearer ```'
   x-logo:
     url: https://static.gameye.com/images/android-chrome-512x512.png
     altText: Gameye Logo
@@ -26,9 +24,7 @@ paths:
     get:
       operationId: stream-logs
       summary: Get logs
-      description: 'Streams the output that the game server writes. You can use it to debug server issues.
-
-        '
+      description: Streams the output that the game server writes. You can use it to debug server issues.
       security:
       - api-token:
         - logs:read
@@ -82,17 +78,6 @@ paths:
       - Logs
 components:
   schemas:
-    FieldViolation:
-      type: object
-      additionalProperties: false
-      required:
-      - field
-      - description
-      properties:
-        field:
-          type: string
-        description:
-          type: string
     ErrorResponse:
       type: object
       required:
@@ -122,6 +107,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldViolation'
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
   securitySchemes:
     api-token:
       type: http
