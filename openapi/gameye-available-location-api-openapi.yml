@@ -72,16 +72,6 @@ paths:
       - Available Location
 components:
   schemas:
-    AvailableLocationsOk:
-      type: object
-      additionalProperties: false
-      required:
-      - locations
-      properties:
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/AvailableLocationsEntry'
     ErrorResponse:
       type: object
       required:
@@ -126,6 +116,16 @@ components:
             description: 'The list of IPV4 addresses that can be pinged.
 
               '
+    AvailableLocationsOk:
+      type: object
+      additionalProperties: false
+      required:
+      - locations
+      properties:
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailableLocationsEntry'
     FieldViolation:
       type: object
       additionalProperties: false

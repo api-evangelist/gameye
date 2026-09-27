@@ -120,6 +120,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldViolation'
+    TagOk:
+      type: object
+      required:
+      - exists
+      properties:
+        exists:
+          type: boolean
     FieldViolation:
       type: object
       additionalProperties: false
@@ -131,13 +138,6 @@ components:
           type: string
         description:
           type: string
-    TagOk:
-      type: object
-      required:
-      - exists
-      properties:
-        exists:
-          type: boolean
   securitySchemes:
     api-token:
       type: http
