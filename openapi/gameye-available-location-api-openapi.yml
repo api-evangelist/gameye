@@ -72,6 +72,32 @@ paths:
       - Available Location
 components:
   schemas:
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+    AvailableLocationsEntry:
+      type: object
+      required:
+      - id
+      - ips
+      properties:
+        id:
+          type: string
+        ips:
+          type: array
+          items:
+            type: string
+            description: 'The list of IPV4 addresses that can be pinged.
+
+              '
     ErrorResponse:
       type: object
       required:
@@ -101,21 +127,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldViolation'
-    AvailableLocationsEntry:
-      type: object
-      required:
-      - id
-      - ips
-      properties:
-        id:
-          type: string
-        ips:
-          type: array
-          items:
-            type: string
-            description: 'The list of IPV4 addresses that can be pinged.
-
-              '
     AvailableLocationsOk:
       type: object
       additionalProperties: false
@@ -126,17 +137,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AvailableLocationsEntry'
-    FieldViolation:
-      type: object
-      additionalProperties: false
-      required:
-      - field
-      - description
-      properties:
-        field:
-          type: string
-        description:
-          type: string
   securitySchemes:
     api-token:
       type: http

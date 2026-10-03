@@ -78,6 +78,17 @@ paths:
       - Logs
 components:
   schemas:
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
     ErrorResponse:
       type: object
       required:
@@ -107,17 +118,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldViolation'
-    FieldViolation:
-      type: object
-      additionalProperties: false
-      required:
-      - field
-      - description
-      properties:
-        field:
-          type: string
-        description:
-          type: string
   securitySchemes:
     api-token:
       type: http
