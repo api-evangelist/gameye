@@ -83,6 +83,16 @@ components:
           type: string
         description:
           type: string
+    AvailableLocationsOk:
+      type: object
+      additionalProperties: false
+      required:
+      - locations
+      properties:
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailableLocationsEntry'
     AvailableLocationsEntry:
       type: object
       required:
@@ -127,16 +137,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldViolation'
-    AvailableLocationsOk:
-      type: object
-      additionalProperties: false
-      required:
-      - locations
-      properties:
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/AvailableLocationsEntry'
   securitySchemes:
     api-token:
       type: http
