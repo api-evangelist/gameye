@@ -91,24 +91,6 @@ paths:
       - Tag
 components:
   schemas:
-    FieldViolation:
-      type: object
-      additionalProperties: false
-      required:
-      - field
-      - description
-      properties:
-        field:
-          type: string
-        description:
-          type: string
-    TagOk:
-      type: object
-      required:
-      - exists
-      properties:
-        exists:
-          type: boolean
     ErrorResponse:
       type: object
       required:
@@ -138,6 +120,24 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldViolation'
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+    TagOk:
+      type: object
+      required:
+      - exists
+      properties:
+        exists:
+          type: boolean
   securitySchemes:
     api-token:
       type: http
