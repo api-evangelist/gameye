@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Gameye Session Token API
+  version: 1.2.1
+  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues. The API offers a complete suite of features to host a server based multiplayer game.
+
+    # Authentication
+
+    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the HTTP header of each request.
+
+    For example: ```Authorization: Bearer ```'
+  x-logo:
+    url: https://static.gameye.com/images/android-chrome-512x512.png
+    altText: Gameye Logo
+servers:
+- url: https://api.sandbox-gameye.gameye.net
+  description: The main sandbox environment.
+- url: https://api.production-gameye.gameye.net
+  description: The main production environment.
+tags:
+- name: Token
+paths:
+  /token:
+    post:
+      operationId: create-token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenRequestBody'
+      responses:
+        201:
+          description: A new API token has successfully been generated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenCreatedResponseBody'
+        401:
+          description: 'You are not authorized to perform this request.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        409:
+          description: 'Name conflict.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        422:
+          description: 'Bad request. This may imply that the given request has invalid
+
+            syntax.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Token
+      summary: Create token
+      x-summary-source: derived
+components:
+  schemas:
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - statusCode
+      - code
+      - message
+      - details
+      - path
+      - identifier
+      - timestamp
+      properties:
+        statusCode:
+          type: integer
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+        identifier:
+          type: string
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldViolation'
+    CreateTokenRequestBody:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - scopes
+      properties:
+        name:
+          type: string
+          description: 'The name of the token to be created.
+
+            '
+        scopes:
+          type: array
+          description: 'The list of scopes that the token should be created with.
+
+            '
+          items:
+            type: string
+        expires_after:
+          type: string
+          description: 'The time after which the token should expire. Valid time units are ''m'' and ''h''.
+
+            Values equal to less than a minute will be rounded up to a minute.
+
+            '
+          examples:
+            one_hour:
+              value: 1h
+              description: 'The token will expire after an hour.
+
+                '
+            two_and_a_half_hours:
+              value: 2h30m
+              description: 'The token will expire after two and a half hours.
+
+                '
+            minute:
+              value: 1m
+              description: 'The token will expire after a minute.
+
+                '
+    TokenCreatedResponseBody:
+      type: object
+      additionalProperties: false
+      required:
+      - token
+      properties:
+        token:
+          type: string
+  securitySchemes:
+    api-token:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+externalDocs:
+  url: https://docs.gameye.com

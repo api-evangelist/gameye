@@ -111,6 +111,36 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/gameye-tag-api-openapi.yml
+- aid: gameye:gameye-application-api
+  name: Gameye Application API
+  description: The Application API from Gameye — 4 operation(s) for application.
+  humanURL: https://gameye.com/docs/api-v2/
+  baseURL: https://api.production-gameye.gameye.net
+  tags:
+  - Application
+  properties:
+  - type: OpenAPI
+    url: openapi/gameye-application-api-openapi.yml
+- aid: gameye:gameye-region-api
+  name: Gameye Region API
+  description: The Region API from Gameye — 1 operation(s) for region.
+  humanURL: https://gameye.com/docs/api-v2/
+  baseURL: https://api.production-gameye.gameye.net
+  tags:
+  - Region
+  properties:
+  - type: OpenAPI
+    url: openapi/gameye-region-api-openapi.yml
+- aid: gameye:gameye-token-api
+  name: Gameye Token API
+  description: The Token API from Gameye — 1 operation(s) for token.
+  humanURL: https://gameye.com/docs/api-v2/
+  baseURL: https://api.production-gameye.gameye.net
+  tags:
+  - Token
+  properties:
+  - type: OpenAPI
+    url: openapi/gameye-token-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

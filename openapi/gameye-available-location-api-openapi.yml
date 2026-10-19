@@ -72,6 +72,35 @@ paths:
       - Available Location
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - statusCode
+      - code
+      - message
+      - details
+      - path
+      - identifier
+      - timestamp
+      properties:
+        statusCode:
+          type: integer
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+        identifier:
+          type: string
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldViolation'
     AvailableLocationsEntry:
       type: object
       required:
@@ -108,35 +137,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AvailableLocationsEntry'
-    ErrorResponse:
-      type: object
-      required:
-      - statusCode
-      - code
-      - message
-      - details
-      - path
-      - identifier
-      - timestamp
-      properties:
-        statusCode:
-          type: integer
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
-        path:
-          type: string
-        timestamp:
-          type: string
-        identifier:
-          type: string
-        violations:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldViolation'
   securitySchemes:
     api-token:
       type: http

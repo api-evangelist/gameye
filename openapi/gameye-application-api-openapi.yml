@@ -1,0 +1,509 @@
+openapi: 3.2.0
+info:
+  title: Gameye Session Application API
+  version: 1.2.1
+  description: 'The Gameye Session API offers an agnostic way of hosting containerized game sessions without having to worry about geographic capacity or scalability issues. The API offers a complete suite of features to host a server based multiplayer game.
+
+    # Authentication
+
+    All endpoints of the Gameye Session API require authorization. This is done through Bearer Token Authentication. A bearer token is thus required in the HTTP header of each request.
+
+    For example: ```Authorization: Bearer ```'
+  x-logo:
+    url: https://static.gameye.com/images/android-chrome-512x512.png
+    altText: Gameye Logo
+servers:
+- url: https://api.sandbox-gameye.gameye.net
+  description: The main sandbox environment.
+- url: https://api.production-gameye.gameye.net
+  description: The main production environment.
+tags:
+- name: Application
+paths:
+  /application:
+    post:
+      operationId: create-application
+      security:
+      - api-token:
+        - application:write
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequestBody'
+      responses:
+        201:
+          description: A new application has successfully been created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResponseBody'
+        401:
+          description: 'You are not authorized to perform this request.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        409:
+          description: 'An application with the given name already exists.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        422:
+          description: 'Bad request. This may imply that the given request has invalid
+
+            syntax.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Application
+      summary: Create application
+      x-summary-source: derived
+    get:
+      operationId: list-applications
+      summary: List the collection of applications
+      security:
+      - api-token:
+        - application:read
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationsResponseBody'
+        401:
+          description: 'You are not authorized to list applications. Please make sure that
+
+            the included bearer token is correct.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: 'Your API token may not have the required permissions to invoke this endpoint.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Application
+  /application/{name}/tags:
+    parameters:
+    - name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the application.
+      example: my-nginx
+    post:
+      operationId: enable-tag
+      description: Enables the specified tag for a given application. If the tag already exists, it may cause this tag to be pulled forward for preloading across Gameye's infrastructure. Once preloaded, the tag can be used to start new sessions in the future.
+      security:
+      - api-token:
+        - application:write
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableApplicationTagRequestBody'
+      responses:
+        204:
+          description: 'The specified tag has successfully been enabled for this application.
+
+            '
+        401:
+          description: 'You are not authorized. Please make sure that the included bearer token is correct.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: 'Your API token may not have the required permissions to invoke this endpoint.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: 'The specified application or tag does not exist.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        422:
+          description: 'Bad request. This may imply that the given request has invalid syntax.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Application
+      summary: Enable tag
+      x-summary-source: derived
+  /application/{name}/tags/available:
+    parameters:
+    - name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the application.
+      example: my-nginx
+    - name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: The page number to retrieve.
+    - name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+      description: The number of tags to retrieve per page.
+    get:
+      operationId: list-application-tags-upstream
+      summary: List all available tags for a specific application in the upstream Docker…
+      security:
+      - api-token:
+        - application:read
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationRegistryTagsResponseBody'
+        401:
+          description: 'You are not authorized to list registry tags. Please make sure that
+
+            the included bearer token is correct.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: 'Your API token may not have the required permissions to invoke this endpoint.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Application
+  /application/{name}:
+    parameters:
+    - name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the application.
+    put:
+      operationId: edit-application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditApplicationRequestBody'
+      responses:
+        204:
+          description: This application has successfully been edited.
+        401:
+          description: 'You are not authorized to perform this request.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: 'Could not find the application or an entity referenced in the body.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+      - Application
+      summary: Edit application
+      x-summary-source: derived
+components:
+  schemas:
+    CreateApplicationRequestBody:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - registry
+      - repository
+      - tagKeep
+      - networkMode
+      - reservation
+      - limits
+      - ports
+      - regions
+      - nodePool
+      properties:
+        name:
+          type: string
+          description: 'The name of this application.
+
+            '
+          example: nginx
+        registry:
+          type: string
+          example: dockerhub
+        repository:
+          type: string
+        tagKeep:
+          type: integer
+        networkMode:
+          type: string
+        limits:
+          $ref: '#/components/schemas/Limits'
+        reservation:
+          $ref: '#/components/schemas/Reservation'
+        nodePool:
+          type: string
+        regions:
+          type: array
+          items:
+            type: string
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortBinding'
+    Limits:
+      type: object
+      additionalProperties: false
+      required:
+      - cpu
+      - ram
+      properties:
+        cpu:
+          type: number
+        ram:
+          type: number
+        gpu:
+          type: number
+    CreateApplicationResponseBody:
+      type: object
+      additionalProperties: false
+    PortBinding:
+      type: object
+      additionalProperties: false
+      required:
+      - requested
+      - protocol
+      - tls
+      properties:
+        requested:
+          type: integer
+        protocol:
+          type: string
+        tls:
+          type: boolean
+    Reservation:
+      type: object
+      additionalProperties: false
+      required:
+      - cpu
+      - ram
+      properties:
+        cpu:
+          type: number
+        ram:
+          type: number
+        gpu:
+          type: number
+    EditApplicationRequestBody:
+      type: object
+      additionalProperties: false
+      properties:
+        repository:
+          type: string
+        tagKeep:
+          type: integer
+        networkMode:
+          type: string
+        limits:
+          $ref: '#/components/schemas/Limits'
+        reservation:
+          $ref: '#/components/schemas/Reservation'
+        registry:
+          type: string
+        nodePool:
+          type: string
+        regions:
+          type: array
+          items:
+            type: string
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortBinding'
+    ListApplicationsResponseBody:
+      type: object
+      additionalProperties: false
+      required:
+      - applications
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListedApplication'
+    EnableApplicationTagRequestBody:
+      type: object
+      additionalProperties: false
+      required:
+      - tag
+      properties:
+        tag:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - statusCode
+      - code
+      - message
+      - details
+      - path
+      - identifier
+      - timestamp
+      properties:
+        statusCode:
+          type: integer
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+        identifier:
+          type: string
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldViolation'
+    RegistryTag:
+      type: object
+      required:
+      - version
+      properties:
+        version:
+          type: string
+    ListedApplication:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - repository
+      - tagKeep
+      - networkMode
+      - reservation
+      - limits
+      - ports
+      - regions
+      properties:
+        name:
+          type: string
+          description: 'The name of this application.
+
+            '
+          example: nginx
+          x-order: 1
+        repository:
+          type: string
+          x-order: 2
+        tagKeep:
+          type: integer
+          x-order: 3
+        networkMode:
+          type: string
+          x-order: 4
+        limits:
+          $ref: '#/components/schemas/Limits'
+          x-order: 5
+        reservation:
+          $ref: '#/components/schemas/Reservation'
+          x-order: 6
+        registry:
+          type: string
+          x-order: 7
+        nodePool:
+          type: string
+          x-order: 9
+        regions:
+          type: array
+          items:
+            type: string
+          x-order: 10
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortBinding'
+          x-order: 11
+    FieldViolation:
+      type: object
+      additionalProperties: false
+      required:
+      - field
+      - description
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+    ListApplicationRegistryTagsResponseBody:
+      type: object
+      additionalProperties: false
+      required:
+      - tags
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegistryTag'
+  securitySchemes:
+    api-token:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+externalDocs:
+  url: https://docs.gameye.com
