@@ -64,6 +64,138 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Gameye is a company surfaced as a portfolio company of seedcamp and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Gameye is a managed game server orchestration platform for multiplayer game studios, founded in 2017 in Rotterdam (Gameye B.V.). It runs dedicated, containerized game servers across bare metal, cloud, and edge providers behind a single REST API — the Session API. Studios call POST /session with a region and a Docker image; Gameye selects the best available location, starts a container in about half a second, and returns the host IP and mapped ports players connect to. Capacity-based pricing carries no egress fees, and the platform is matchmaker-agnostic (Pragma Engine, Nakama, PlayFab, FlexMatch). Gameye has orchestrated 120M+ sessions with a 99.99% uptime SLA and serves studios including Torn Banner Studios (Chivalry 2) and Remedy Entertainment.
 
-Backed by: seedcamp — http://gameye.com
+**Areas:** Company · Game Server Hosting · Game Server Orchestration · Multiplayer · Containers · Infrastructure · Gaming · Edge Computing · DevOps
+
+## Gameye on APIs.io
+
+Everything profiled for Gameye is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/gameye/](https://apis.io/providers/gameye/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [Gameye Artifacts API](https://apis.io/apis/gameye/gameye-artifacts-api/) — The Artifacts API from Gameye — 1 operation(s) for artifacts.
+- [Gameye Available Location API](https://apis.io/apis/gameye/gameye-available-location-api/) — The Available Location API from Gameye — 1 operation(s) for available location.
+- [Gameye Logs API](https://apis.io/apis/gameye/gameye-logs-api/) — The Logs API from Gameye — 1 operation(s) for logs.
+- [Gameye Session API](https://apis.io/apis/gameye/gameye-session-api/) — The Session API from Gameye — 4 operation(s) for session.
+- [Gameye Tag API](https://apis.io/apis/gameye/gameye-tag-api/) — The Tag API from Gameye — 1 operation(s) for tag.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (3)
+
+Multi-step workflows that chain operations into a business task.
+
+- [Allocate a Gameye session and get its connection address](https://apis.io/arazzos/gameye/gameye-allocate-session/)
+- [Manage the player roster on a Gameye session](https://apis.io/arazzos/gameye/gameye-player-lifecycle/)
+- [Stream logs, stop a Gameye session, and download an artifact](https://apis.io/arazzos/gameye/gameye-session-teardown/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [gameye](https://apis.io/servers/gameye/gameye/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Gameye Agentic Access](https://apis.io/agentic-access/gameye/gameye-agentic-access/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Gameye Session Artifacts API](https://apis.io/collections/gameye/open-gameye-artifacts-api/)
+- [Gameye Session Artifacts Available Location API](https://apis.io/collections/gameye/open-gameye-available-location-api/)
+- [Gameye Session Artifacts Logs API](https://apis.io/collections/gameye/open-gameye-logs-api/)
+- [Gameye Artifacts Session API](https://apis.io/collections/gameye/open-gameye-session-api/)
+- [Gameye Session Artifacts Tag API](https://apis.io/collections/gameye/open-gameye-tag-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Gameye Session Overlay](https://apis.io/overlays/gameye/gameye-session-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Gameye Authentication](https://apis.io/security/gameye/gameye-authentication/)
+- [Gameye Domain Security](https://apis.io/security/gameye/gameye-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://gameye.com)
+- [Documentation](https://gameye.com/docs/api-v2/)
+- [Getting started](https://gameye.com/docs/getting-started/)
+- [API reference](https://gameye.com/docs/api-v2/)
+- [Pricing](https://gameye.com/pricing/)
+- [Sign up](https://trial.gameye.com/)
+- [Support](https://gameye.com/docs/support/getting-support/)
+- [Changelog](https://gameye.com/docs/changelogs/)
+- [Blog](https://gameye.com/blog/)
+- [Terms of service](https://gameye.com/terms/)
+- [Privacy policy](https://gameye.com/privacy/)
+- [GitHub](https://github.com/Gameye)
+- [Status](https://gameye.com/status/)
+
+## API Evangelist rating
+
+**Kin Score 51.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 45.5 |
+| Contract governance | 4.5 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 73.2 |
+| Access clarity | 44.7 |
+
+**Agent readiness 28.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/gameye/](https://apis.io/providers/gameye/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Gameye: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/gameye/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
